@@ -60,6 +60,9 @@ async function main() {
   lines.push(`  originalTitle?: string;`);
   lines.push(`  lede?: string;`);
   lines.push(`  estimatedMinutes: number;`);
+  lines.push(`  handbookSection?: string;`);
+  lines.push(`  handbookPages?: string;`);
+  lines.push(`  unegRefs?: string[];`);
   lines.push(`};`);
   lines.push("");
 

@@ -45,6 +45,9 @@ export type LessonFrontmatter = {
   originalTitle?: string;
   lede?: string;
   estimatedMinutes: number;
+  handbookSection?: string;
+  handbookPages?: string;
+  unegRefs?: string[];
 };
 
 export type LessonEntry = {
@@ -323,9 +326,16 @@ export const LESSONS: LessonEntry[] = [
     frontmatter: {
       "title": "The CPE launch meeting",
       "order": 1,
-      "originalTitle": "1.1 The CPE launch meeting",
-      "lede": "The country programme evaluation begins not with the consultants, but with a meeting. The CO Representative gathers the country office and lays the foundation of the next 11 months of work.",
-      "estimatedMinutes": 7
+      "originalTitle": "1.1 The country programme evaluation launch meeting",
+      "lede": "The Country Programme Evaluation begins not with the consultants, but with a meeting of the country office. The CO Representative gathers the team and lays the foundation for eleven months of work.",
+      "handbookSection": "1.1",
+      "handbookPages": "7–8",
+      "estimatedMinutes": 8,
+      "unegRefs": [
+        "UNEG Norms and standards for evaluation",
+        "UNEG Ethical guidelines",
+        "UNEG Code of conduct for evaluation"
+      ]
     },
     Component: preparation_01_the_cpe_launch_meeting,
   },
@@ -334,11 +344,16 @@ export const LESSONS: LessonEntry[] = [
     slug: "02-the-evaluation-team-stage-1-young-and-emerging-evaluator",
     href: "/learn/preparation/02-the-evaluation-team-stage-1-young-and-emerging-evaluator",
     frontmatter: {
-      "title": "The evaluation team (stage 1) — Young and Emerging Evaluator",
+      "title": "The evaluation team (stage 1) — the Young and Emerging Evaluator",
       "order": 2,
-      "originalTitle": "1.2 The evaluation team (stage 1) — Young and Emerging Evaluator",
-      "lede": "Recruitment of the evaluation team happens in two stages. The first person hired is not the team leader — it's a junior, an emerging evaluator under 35, brought on board right after the launch meeting.",
-      "estimatedMinutes": 7
+      "originalTitle": "1.2 The evaluation team (stage 1)",
+      "lede": "Recruitment of the evaluation team happens in two stages. The first person hired is not the team leader. It is a junior evaluator — under 35 — brought on board immediately after the launch meeting.",
+      "handbookSection": "1.2",
+      "handbookPages": "8–9",
+      "estimatedMinutes": 7,
+      "unegRefs": [
+        "UNFPA guidance on leveraging the power of youth in evaluation"
+      ]
     },
     Component: preparation_02_the_evaluation_team_stage_1_young_and_emerging_evaluator,
   },
@@ -350,8 +365,14 @@ export const LESSONS: LessonEntry[] = [
       "title": "The evaluation questions workshop",
       "order": 3,
       "originalTitle": "1.3 The evaluation questions workshop",
-      "lede": "A CPE is about asking questions that matter. The questions are not drafted by the CPE Manager alone — they emerge from a structured workshop with country programme stakeholders.",
-      "estimatedMinutes": 7
+      "lede": "A CPE is about asking questions that matter. The questions are not drafted by the CPE Manager alone — they emerge from a structured workshop that opens up the country programme's theory of change for collective reality-checking.",
+      "handbookSection": "1.3",
+      "handbookPages": "9–12",
+      "estimatedMinutes": 10,
+      "unegRefs": [
+        "OECD-DAC criteria for evaluating development programmes",
+        "UNFPA strategic plan, 2022–2025"
+      ]
     },
     Component: preparation_03_the_evaluation_questions_workshop,
   },
@@ -362,9 +383,15 @@ export const LESSONS: LessonEntry[] = [
     frontmatter: {
       "title": "Drafting the Terms of Reference (R2U ToR)",
       "order": 4,
-      "originalTitle": "1.4 Drafting the Terms of Reference (R2U ToR)",
-      "lede": "UNFPA does not start the TOR from a blank page. There is a Ready-to-Use Terms of Reference template — the R2U ToR — with four named annexes. The CPE Manager fills it in.",
-      "estimatedMinutes": 7
+      "originalTitle": "1.4 Drafting the terms of reference",
+      "lede": "The ToR is the contract that frames the whole CPE — objectives, scope, criteria, questions, timeline, team profile, deliverables. The handbook supplies a Ready-to-Use template so country offices can focus on the parts that actually need adapting.",
+      "handbookSection": "1.4",
+      "handbookPages": "12–14",
+      "estimatedMinutes": 9,
+      "unegRefs": [
+        "UNEG Norms and standards",
+        "UNEG Code of conduct for evaluation in the UN system"
+      ]
     },
     Component: preparation_04_drafting_the_terms_of_reference_r2u_tor,
   },
@@ -376,8 +403,13 @@ export const LESSONS: LessonEntry[] = [
       "title": "The evaluation reference group",
       "order": 5,
       "originalTitle": "1.5 The evaluation reference group",
-      "lede": "The Evaluation Reference Group — the ERG — is the standing body of stakeholders that advises the CPE across its entire lifecycle. Forming it well is one of the small decisions with outsized influence.",
-      "estimatedMinutes": 7
+      "lede": "The ERG is the multi-stakeholder body that keeps the CPE honest. It reviews every major deliverable, co-creates the recommendations, and helps disseminate the results — without diluting the team's independence.",
+      "handbookSection": "1.5",
+      "handbookPages": "14",
+      "estimatedMinutes": 6,
+      "unegRefs": [
+        "UNFPA ERG Terms of Reference template"
+      ]
     },
     Component: preparation_05_the_evaluation_reference_group,
   },
@@ -388,9 +420,17 @@ export const LESSONS: LessonEntry[] = [
     frontmatter: {
       "title": "The evaluation team (stage 2) — the main consultants",
       "order": 6,
-      "originalTitle": "1.6 The evaluation team (stage 2) — the main consultants",
-      "lede": "After the YEE, the main evaluation team is recruited through a two-tier process: pre-selection by the country office, pre-qualification by the regional office.",
-      "estimatedMinutes": 7
+      "originalTitle": "1.6 The evaluation team (stage 2)",
+      "lede": "Stage 2 is the recruitment of the team leader and thematic consultants. The handbook is explicit on the multi-step selection process, the conflict-of-interest rules, and the mandatory pre-assignment training.",
+      "handbookSection": "1.6",
+      "handbookPages": "14–17",
+      "estimatedMinutes": 10,
+      "unegRefs": [
+        "UNFPA Policy and Procedures for Contracting Individual Consultants (2022)",
+        "ALNAP Evaluation of humanitarian action",
+        "BSAFE (UN security training)",
+        "Prevention of Sexual Exploitation and Abuse (PSEA) e-learning"
+      ]
     },
     Component: preparation_06_the_evaluation_team_stage_2_the_main_consultants,
   },
@@ -402,8 +442,13 @@ export const LESSONS: LessonEntry[] = [
       "title": "The document repository",
       "order": 7,
       "originalTitle": "1.7 The document repository",
-      "lede": "Long before the evaluators arrive, the country office assembles every document the team will need. The repository is the team's first and most-used resource.",
-      "estimatedMinutes": 7
+      "lede": "Without a comprehensive, well-organised set of documents, the evaluators cannot undertake the documentary review that the design phase depends on. The CPE Manager builds the repository before the team arrives.",
+      "handbookSection": "1.7",
+      "handbookPages": "17",
+      "estimatedMinutes": 7,
+      "unegRefs": [
+        "UNFPA CPE Management Kit — Document Repository Checklist"
+      ]
     },
     Component: preparation_07_the_document_repository,
   },
@@ -415,8 +460,14 @@ export const LESSONS: LessonEntry[] = [
       "title": "The catalogue of UNFPA interventions",
       "order": 8,
       "originalTitle": "1.8 The catalogue of UNFPA interventions",
-      "lede": "Annex C of the R2U ToR is a complete list of every UNFPA intervention in the country during the evaluation period. Building it is more work than it sounds — and more important.",
-      "estimatedMinutes": 7
+      "lede": "An Excel list of every UNFPA intervention with its budget and expenditure for the period under evaluation. It gives the evaluators a complete operational picture before they meet a single stakeholder.",
+      "handbookSection": "1.8",
+      "handbookPages": "17",
+      "estimatedMinutes": 6,
+      "unegRefs": [
+        "UNFPA R2U ToR Annex C — list of UNFPA interventions template",
+        "Guidance note: Establishing the list of UNFPA interventions"
+      ]
     },
     Component: preparation_08_the_catalogue_of_unfpa_interventions,
   },
@@ -428,8 +479,13 @@ export const LESSONS: LessonEntry[] = [
       "title": "The stakeholder map",
       "order": 9,
       "originalTitle": "1.9 The stakeholder map",
-      "lede": "Annex B of the R2U ToR is the stakeholder map. It identifies every actor in the country programme's ecosystem — and signals who the evaluation team must reach.",
-      "estimatedMinutes": 7
+      "lede": "A comprehensive overview of every organisation, group, and rights-holder community connected to the country programme. The stakeholder map is the basis on which evaluators will design their sampling in the next phase.",
+      "handbookSection": "1.9",
+      "handbookPages": "18",
+      "estimatedMinutes": 7,
+      "unegRefs": [
+        "UNFPA R2U ToR Annex B — stakeholder map template"
+      ]
     },
     Component: preparation_09_the_stakeholder_map,
   },
