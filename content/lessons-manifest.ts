@@ -185,9 +185,11 @@ export const LESSONS: LessonEntry[] = [
     frontmatter: {
       "title": "Roles and responsibilities for strategic communication",
       "order": 1,
-      "originalTitle": "5.1 Roles and responsibilities for strategic communication",
-      "lede": "Communication of CPE results is not the job of one person. It is a joint responsibility — and naming the people is half the work.",
-      "estimatedMinutes": 9
+      "originalTitle": "5.1 Roles and responsibilities for strategic communication and facilitation of use of the CPE results",
+      "lede": "Phase 5 is jointly owned. The CPE Manager and the CO communication officer carry the strategic communication; the evaluation team provides inputs, products, and presence; senior management drives uptake. Without explicit role-sharing, the report sits on a shelf.",
+      "handbookSection": "5.1",
+      "handbookPages": "87",
+      "estimatedMinutes": 6
     },
     Component: dissemination_01_roles_and_responsibilities_for_strategic_communication,
   },
@@ -198,9 +200,11 @@ export const LESSONS: LessonEntry[] = [
     frontmatter: {
       "title": "The five key elements of strategic communication",
       "order": 2,
-      "originalTitle": "5.2 The five key elements of strategic communication",
-      "lede": "The handbook is specific. There are five elements that make CPE communication strategic — and they begin not at the end of the evaluation, but at the beginning.",
-      "estimatedMinutes": 9
+      "originalTitle": "5.2.1 Key elements",
+      "lede": "Section 5.2.1 sets out the five things every CPE communication strategy must do: plan early, focus on the audience, diversify the products, build a minimum communications package, and time everything to decision-making windows.",
+      "handbookSection": "5.2.1",
+      "handbookPages": "88–90",
+      "estimatedMinutes": 10
     },
     Component: dissemination_02_the_five_key_elements_of_strategic_communication,
   },
@@ -209,11 +213,17 @@ export const LESSONS: LessonEntry[] = [
     slug: "03-2-preparing-the-strategic-communication-plan",
     href: "/learn/dissemination/03-2-preparing-the-strategic-communication-plan",
     frontmatter: {
-      "title": ".2 Preparing the strategic communication plan",
+      "title": "Preparing the strategic communication plan",
       "order": 3,
-      "originalTitle": "5.2.2 Preparing the strategic communication plan",
-      "lede": "The communication plan is a real document with real components — the handbook prescribes them in Box 19.",
-      "estimatedMinutes": 9
+      "originalTitle": "5.2.2 Preparing a strategic communication plan for the CPE",
+      "lede": "The communication plan turns the five strategic elements into operations: objectives, audiences, products, channels, timelines, budget, and a measurement framework. Without an approved plan, dissemination drifts.",
+      "handbookSection": "5.2.2 + 5.2.3",
+      "handbookPages": "90–93",
+      "estimatedMinutes": 9,
+      "unegRefs": [
+        "UNFPA digital content accessibility guidelines (2020)",
+        "UNFPA Strategy to enhance evaluation use through communications (2022–2025)"
+      ]
     },
     Component: dissemination_03_2_preparing_the_strategic_communication_plan,
   },
@@ -222,11 +232,17 @@ export const LESSONS: LessonEntry[] = [
     slug: "04-1-the-management-response",
     href: "/learn/dissemination/04-1-the-management-response",
     frontmatter: {
-      "title": ".1 The management response",
+      "title": "The management response",
       "order": 4,
       "originalTitle": "5.3.1 The management response",
-      "lede": "The management response is the moment when the CPE stops being a study and becomes a commitment.",
-      "estimatedMinutes": 9
+      "lede": "The management response is where recommendations become decisions. Within six weeks of the CPE report's submission to the IEO, the CO and its partners review every recommendation, agree what they will do about it, and commit to action with a named owner and a date.",
+      "handbookSection": "5.3.1",
+      "handbookPages": "94–96",
+      "estimatedMinutes": 11,
+      "unegRefs": [
+        "UNFPA Guide on development, reporting, and tracking of management responses to evaluation",
+        "TeamCentral — UNFPA management response-tracking database"
+      ]
     },
     Component: dissemination_04_1_the_management_response,
   },
@@ -235,11 +251,17 @@ export const LESSONS: LessonEntry[] = [
     slug: "05-2-long-term-utilization-of-the-cpe",
     href: "/learn/dissemination/05-2-long-term-utilization-of-the-cpe",
     frontmatter: {
-      "title": ".2 Long-term utilization of the CPE",
+      "title": "Long-term utilisation of the CPE",
       "order": 5,
-      "originalTitle": "5.3.2 Long-term utilization of the CPE",
-      "lede": "The CPE is not over when the report is published. The most useful CPEs continue to inform decisions years after the team has been paid.",
-      "estimatedMinutes": 9
+      "originalTitle": "5.3.2 Long term utilization of the CPE",
+      "lede": "The management response delivers short-term action. Long-term utilisation is what turns one CPE into years of programmatic adaptation, advocacy material, and institutional learning. The CPE Manager's role doesn't end at publication.",
+      "handbookSection": "5.3.2",
+      "handbookPages": "96",
+      "estimatedMinutes": 8,
+      "unegRefs": [
+        "UNFPA guidance on leveraging the power of youth in evaluation",
+        "Inter-Agency Humanitarian Evaluations (IAHE) framework"
+      ]
     },
     Component: dissemination_05_2_long_term_utilization_of_the_cpe,
   },
