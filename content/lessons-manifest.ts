@@ -64,11 +64,18 @@ export const LESSONS: LessonEntry[] = [
     slug: "01-1-orientation-and-induction",
     href: "/learn/design/01-1-orientation-and-induction",
     frontmatter: {
-      "title": ".1 Orientation and induction",
+      "title": "Orientation and induction",
       "order": 1,
-      "originalTitle": "2.1.1 Orientation and induction",
-      "lede": "Before the team can think, they have to know. The design phase opens with two meetings — an induction by the CPE Manager, then a full orientation by the country office.",
-      "estimatedMinutes": 8
+      "originalTitle": "2.1.1 Orientation",
+      "lede": "Before the evaluators write a line of the design report, two meetings frame their work: an induction with the CPE Manager, and an orientation with the whole country office. These set the common understanding the rest of the design phase depends on.",
+      "handbookSection": "2.1.1",
+      "handbookPages": "21–22",
+      "estimatedMinutes": 8,
+      "unegRefs": [
+        "UNEG Code of conduct for evaluation in the UN system",
+        "UNEG Ethical guidelines for evaluation",
+        "UNEG Guidance on integrating human rights and gender equality in evaluations"
+      ]
     },
     Component: design_01_1_orientation_and_induction,
   },
@@ -77,11 +84,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "02-2-desk-review-and-first-round-of-interviews",
     href: "/learn/design/02-2-desk-review-and-first-round-of-interviews",
     frontmatter: {
-      "title": ".2 Desk review and first round of interviews",
+      "title": "Desk review and first round of interviews",
       "order": 2,
       "originalTitle": "2.1.2 Desk review and first round of interviews",
-      "lede": "Most of the design phase is reading. The team works through the document repository, then talks to the people inside UNFPA who can frame what the documents don't say.",
-      "estimatedMinutes": 8
+      "lede": "At the design phase, extensive document review forms the bulk of the evaluators' work. Combined with a first round of interviews, it builds the foundation for everything that follows — questions, matrix, sampling, agenda.",
+      "handbookSection": "2.1.2",
+      "handbookPages": "23",
+      "estimatedMinutes": 7
     },
     Component: design_02_2_desk_review_and_first_round_of_interviews,
   },
@@ -90,11 +99,18 @@ export const LESSONS: LessonEntry[] = [
     slug: "03-1-theory-based-contribution-analysis",
     href: "/learn/design/03-1-theory-based-contribution-analysis",
     frontmatter: {
-      "title": ".1 Theory-based contribution analysis",
+      "title": "A theory-based approach to conduct a contribution analysis",
       "order": 3,
-      "originalTitle": "2.2.1 Theory-based contribution analysis",
-      "lede": "The UNFPA CPE methodology has a name. It is a theory-based contribution analysis. Understanding it is non-negotiable — because every choice downstream flows from it.",
-      "estimatedMinutes": 8
+      "originalTitle": "2.2.1 A theory-based approach to conduct a contribution analysis",
+      "lede": "The CPE doesn't try to prove that UNFPA caused observed changes. It builds a contribution argument — using the country programme theory of change to assemble evidence that UNFPA's interventions made a meaningful difference, alongside other factors.",
+      "handbookSection": "2.2.1",
+      "handbookPages": "23–26",
+      "estimatedMinutes": 12,
+      "unegRefs": [
+        "John Mayne, Contribution analysis: an approach to exploring cause and effect, ILAC Brief 16, May 2008",
+        "UNFPA strategic plan, 2022–2025 (DP/FPA/2021/8)",
+        "UNDAF — Guidance on theory of change"
+      ]
     },
     Component: design_03_1_theory_based_contribution_analysis,
   },
@@ -103,11 +119,17 @@ export const LESSONS: LessonEntry[] = [
     slug: "04-2-evaluation-questions-and-the-evaluation-matrix",
     href: "/learn/design/04-2-evaluation-questions-and-the-evaluation-matrix",
     frontmatter: {
-      "title": ".2 Evaluation questions and the evaluation matrix",
+      "title": "Evaluation questions and the evaluation matrix",
       "order": 4,
-      "originalTitle": "2.2.2 Evaluation questions and the evaluation matrix",
-      "lede": "The evaluation matrix is the analytical engine of the entire CPE. The team builds it during design — and lives by it through fieldwork and reporting.",
-      "estimatedMinutes": 8
+      "originalTitle": "2.2.2 Specifying the evaluation questions and developing the evaluation matrix",
+      "lede": "The evaluation matrix is the CPE's analytical framework. It unpacks each evaluation question into criteria, assumptions, indicators, and the methods for testing them — and once approved in the design report, it is fixed.",
+      "handbookSection": "2.2.2",
+      "handbookPages": "26–31",
+      "estimatedMinutes": 12,
+      "unegRefs": [
+        "OECD-DAC Criteria for evaluating development programmes",
+        "ALNAP — Evaluating humanitarian action using the OECD-DAC criteria"
+      ]
     },
     Component: design_04_2_evaluation_questions_and_the_evaluation_matrix,
   },
@@ -116,11 +138,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "05-3-a-mixed-methods-approach",
     href: "/learn/design/05-3-a-mixed-methods-approach",
     frontmatter: {
-      "title": ".3 A mixed-methods approach",
+      "title": "A mixed-methods approach",
       "order": 5,
-      "originalTitle": "2.2.3 A mixed-methods approach",
-      "lede": "UNFPA prescribes mixed methods. Not as a preference. As the default — because the operational context demands it.",
-      "estimatedMinutes": 8
+      "originalTitle": "2.2.3 A mixed-method approach",
+      "lede": "No single method captures the whole picture. The CPE combines qualitative and quantitative data — through document review, interviews, focus groups, surveys, and observation — so that triangulation can produce findings that hold up.",
+      "handbookSection": "2.2.3",
+      "handbookPages": "31–34",
+      "estimatedMinutes": 11
     },
     Component: design_05_3_a_mixed_methods_approach,
   },
@@ -129,11 +153,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "06-stakeholder-sampling-site-selection-and-field-phase-agenda",
     href: "/learn/design/06-stakeholder-sampling-site-selection-and-field-phase-agenda",
     frontmatter: {
-      "title": "Stakeholder sampling, site selection and field-phase agenda",
+      "title": "Stakeholder sampling, site selection, and the field-work agenda",
       "order": 6,
-      "originalTitle": "2.3 Stakeholder sampling, site selection and field-phase agenda",
-      "lede": "The team cannot talk to everyone. They cannot visit every site. The sampling and agenda decisions made in design determine whose voice enters the evidence base.",
-      "estimatedMinutes": 8
+      "originalTitle": "2.3 Stakeholders sampling, sites selection and the field work agenda",
+      "lede": "The CPE does not aim at a statistically representative sample. It aims at an illustrative one — sampling stakeholders and sites that, together, can produce evidence-based findings about UNFPA's contribution across the country programme.",
+      "handbookSection": "2.3",
+      "handbookPages": "34–37",
+      "estimatedMinutes": 10
     },
     Component: design_06_stakeholder_sampling_site_selection_and_field_phase_agenda,
   },
@@ -142,11 +168,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "07-the-design-report-version-1-and-version-2",
     href: "/learn/design/07-the-design-report-version-1-and-version-2",
     frontmatter: {
-      "title": "The Design Report — version 1 and version 2",
+      "title": "Drafting the design report — versions 1 and 2",
       "order": 7,
-      "originalTitle": "2.4 The Design Report — version 1 and version 2",
-      "lede": "The design phase ends with a single deliverable that pulls everything together: the Design Report. It is the team's first major artefact — and the moment the evaluation's scope is fixed.",
-      "estimatedMinutes": 8
+      "originalTitle": "2.4 Drafting the design report",
+      "lede": "The design report is the contract for the rest of the CPE. Once approved, the questions, matrix, methods, sampling and timeline are fixed. Two versions, two QA cycles, one ERG meeting — and then fieldwork can begin.",
+      "handbookSection": "2.4",
+      "handbookPages": "37–44",
+      "estimatedMinutes": 11
     },
     Component: design_07_the_design_report_version_1_and_version_2,
   },
