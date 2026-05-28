@@ -83,20 +83,20 @@ export function MorphingBackground() {
         width="100%"
         height="100%"
         preserveAspectRatio="xMidYMid slice"
-        className="absolute -inset-1 opacity-90"
+        className="absolute -inset-1 opacity-60"
       >
-        {/* gradients */}
+        {/* gradients — kept soft so text stays high-contrast on top */}
         <defs>
           <radialGradient id="grad-a" cx="40%" cy="35%">
-            <stop offset="0%" stopColor="rgba(0, 111, 183, 0.55)" />
+            <stop offset="0%" stopColor="rgba(0, 111, 183, 0.30)" />
             <stop offset="100%" stopColor="rgba(0, 111, 183, 0)" />
           </radialGradient>
           <radialGradient id="grad-b" cx="70%" cy="60%">
-            <stop offset="0%" stopColor="rgba(20, 184, 166, 0.4)" />
+            <stop offset="0%" stopColor="rgba(20, 184, 166, 0.22)" />
             <stop offset="100%" stopColor="rgba(20, 184, 166, 0)" />
           </radialGradient>
           <radialGradient id="grad-c" cx="30%" cy="75%">
-            <stop offset="0%" stopColor="rgba(10, 37, 64, 0.42)" />
+            <stop offset="0%" stopColor="rgba(10, 37, 64, 0.20)" />
             <stop offset="100%" stopColor="rgba(10, 37, 64, 0)" />
           </radialGradient>
         </defs>

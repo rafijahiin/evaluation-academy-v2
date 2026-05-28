@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useInView, useMotionValue, animate } from "motion/react";
+import { useInView } from "motion/react";
 
 type CountUpProps = {
   to: number;
@@ -14,13 +14,12 @@ type CountUpProps = {
 /**
  * Animates a number from 0 → `to` when it scrolls into view.
  *
- * SSR-safe: server renders the final value, client mounts to 0 and
- * animates up. Uses animate()'s onUpdate callback to write the
- * formatted value into React state — more reliable than embedding
- * a MotionValue as children, which depends on Motion's text-content
- * sync and can silently fail.
+ * Uses plain requestAnimationFrame instead of Motion's animate() to avoid
+ * library quirks where motion-value-as-text-child would silently stop
+ * updating for certain magnitudes (e.g. 1994 staying at 0).
  *
- * Reduced-motion handled globally by MotionProvider's MotionConfig.
+ * SSR-safe: server renders the final value; client mounts to that same
+ * value and animates from 0 once the element scrolls into view.
  */
 export function CountUp({
   to,
@@ -32,10 +31,8 @@ export function CountUp({
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [mounted, setMounted] = useState(false);
-  // Server + first client render: show the final value (matches SSR output)
   const [display, setDisplay] = useState(() => to.toFixed(decimals));
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const mv = useMotionValue(0);
 
   useEffect(() => {
     setMounted(true);
@@ -43,16 +40,28 @@ export function CountUp({
 
   useEffect(() => {
     if (!mounted || !inView) return;
-    // Restart the animation from zero on client when it enters view
-    mv.set(0);
-    setDisplay("0".padStart(1, "0") + (decimals > 0 ? "." + "0".repeat(decimals) : ""));
-    const controls = animate(mv, to, {
-      duration,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setDisplay(v.toFixed(decimals)),
-    });
-    return () => controls.stop();
-  }, [mounted, inView, to, duration, decimals, mv]);
+    let raf = 0;
+    let startTs: number | null = null;
+
+    const tick = (t: number) => {
+      if (startTs === null) startTs = t;
+      const elapsed = (t - startTs) / 1000;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOut cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = eased * to;
+      setDisplay(value.toFixed(decimals));
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setDisplay(to.toFixed(decimals));
+      }
+    };
+
+    setDisplay("0");
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [mounted, inView, to, duration, decimals]);
 
   return (
     <span ref={ref} className={className}>

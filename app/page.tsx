@@ -1,5 +1,5 @@
 import { Hero } from "@/components/hero/Hero";
-import { ChaptersBento } from "@/components/landing/ChaptersBento";
+import { TheJourney } from "@/components/landing/TheJourney";
 import { GlobalMandate } from "@/components/landing/GlobalMandate";
 import { Footer } from "@/components/chrome/Footer";
 
@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ChaptersBento />
+      <TheJourney />
       <GlobalMandate />
       <Footer />
     </>

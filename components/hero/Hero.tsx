@@ -38,13 +38,11 @@ export function Hero() {
         >
           Learn the craft of{" "}
           <span
-            className="italic font-medium"
+            className="italic"
             style={{
-              background:
-                "linear-gradient(135deg, var(--un-blue) 0%, var(--teal) 70%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
+              color: "var(--un-blue-800)",
+              fontWeight: 600,
+              textShadow: "0 1px 0 rgba(255,255,255,0.4)",
             }}
           >
             evaluation
