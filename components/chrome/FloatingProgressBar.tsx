@@ -1,15 +1,16 @@
 "use client";
-import { m, useReducedMotion } from "motion/react";
+import { m } from "motion/react";
 import { useProgress, computePercent } from "@/lib/progress";
 import { COURSE_META } from "@/content/chapters";
 
 /**
- * Slim 2px progress bar at the very top of the viewport.
+ * Slim 3px progress bar at the very top of the viewport.
  * Animates fill on load. Reflects overall lessons completed / total.
+ *
+ * Reduced-motion handled globally by MotionProvider's MotionConfig.
  */
 export function FloatingProgressBar() {
   const { state } = useProgress();
-  const reduced = useReducedMotion();
   const percent = computePercent(
     state.lessonsCompleted.length,
     COURSE_META.totalLessons,
@@ -29,7 +30,7 @@ export function FloatingProgressBar() {
             "linear-gradient(90deg, var(--un-blue) 0%, var(--teal) 60%, var(--amber) 100%)",
           boxShadow: "0 0 12px rgba(0,111,183,0.5)",
         }}
-        initial={reduced ? { width: `${percent}%` } : { width: 0 }}
+        initial={{ width: 0 }}
         animate={{ width: `${percent}%` }}
         transition={{
           duration: 1.4,

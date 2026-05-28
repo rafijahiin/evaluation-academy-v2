@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   useInView,
   useMotionValue,
-  useReducedMotion,
   useTransform,
   animate,
   m,
@@ -20,7 +19,8 @@ type CountUpProps = {
 
 /**
  * Animates a number from 0 → to when it scrolls into view.
- * Respects reduced-motion by jumping straight to the target value.
+ * Server-renders the final value to avoid hydration mismatch;
+ * mounts the animated motion value client-side and re-animates.
  */
 export function CountUp({
   to,
@@ -31,24 +31,30 @@ export function CountUp({
   prefix = "",
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
+  const [mounted, setMounted] = useState(false);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const reduced = useReducedMotion();
-  const mv = useMotionValue(reduced ? to : 0);
+  const mv = useMotionValue(0);
   const rounded = useTransform(mv, (v) => v.toFixed(decimals));
 
   useEffect(() => {
-    if (!inView || reduced) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !inView) return;
     const controls = animate(mv, to, {
       duration,
       ease: [0.22, 1, 0.36, 1],
     });
     return () => controls.stop();
-  }, [inView, reduced, to, duration, mv]);
+  }, [mounted, inView, to, duration, mv]);
 
+  // Server + first client render: show the final value statically
+  // After mount: switch to animated motion value
   return (
     <span ref={ref} className={className}>
       {prefix}
-      <m.span>{rounded}</m.span>
+      {mounted ? <m.span>{rounded}</m.span> : <span>{to.toFixed(decimals)}</span>}
       {suffix}
     </span>
   );

@@ -1,5 +1,6 @@
 "use client";
-import { m, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import { m } from "motion/react";
 
 /**
  * Three soft UN-blue blobs slowly morphing & drifting behind the hero.
@@ -39,44 +40,38 @@ function Blob({
   delay?: number;
   drift: { x: number[]; y: number[] };
 }) {
-  const reduced = useReducedMotion();
   return (
     <m.g
       initial={false}
-      animate={reduced ? undefined : { x: drift.x, y: drift.y }}
-      transition={
-        reduced
-          ? undefined
-          : {
-              duration: duration * 2.4,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
-            }
-      }
+      animate={{ x: drift.x, y: drift.y }}
+      transition={{
+        duration: duration * 2.4,
+        repeat: Infinity,
+        repeatType: "mirror",
+        ease: "easeInOut",
+      }}
     >
       <m.path
         d={paths[0]}
         fill={color}
         initial={false}
-        animate={reduced ? undefined : { d: paths }}
-        transition={
-          reduced
-            ? undefined
-            : {
-                duration,
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-                delay,
-              }
-        }
+        animate={{ d: paths }}
+        transition={{
+          duration,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+          delay,
+        }}
       />
     </m.g>
   );
 }
 
 export function MorphingBackground() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <div
       aria-hidden
@@ -106,26 +101,40 @@ export function MorphingBackground() {
           </radialGradient>
         </defs>
 
-        <Blob
-          paths={blobA}
-          color="url(#grad-a)"
-          duration={14}
-          drift={{ x: [-30, 30], y: [-20, 20] }}
-        />
-        <Blob
-          paths={blobB}
-          color="url(#grad-b)"
-          duration={18}
-          delay={2}
-          drift={{ x: [40, -20], y: [10, -30] }}
-        />
-        <Blob
-          paths={blobC}
-          color="url(#grad-c)"
-          duration={22}
-          delay={4}
-          drift={{ x: [-10, 50], y: [30, -10] }}
-        />
+        {/* Static fallback for SSR + first paint — paths only, no transforms */}
+        {!mounted && (
+          <>
+            <path d={blobA[0]} fill="url(#grad-a)" />
+            <path d={blobB[0]} fill="url(#grad-b)" />
+            <path d={blobC[0]} fill="url(#grad-c)" />
+          </>
+        )}
+
+        {/* Animated blobs — mount only after hydration to avoid transform mismatch */}
+        {mounted && (
+          <>
+            <Blob
+              paths={blobA}
+              color="url(#grad-a)"
+              duration={14}
+              drift={{ x: [-30, 30], y: [-20, 20] }}
+            />
+            <Blob
+              paths={blobB}
+              color="url(#grad-b)"
+              duration={18}
+              delay={2}
+              drift={{ x: [40, -20], y: [10, -30] }}
+            />
+            <Blob
+              paths={blobC}
+              color="url(#grad-c)"
+              duration={22}
+              delay={4}
+              drift={{ x: [-10, 50], y: [30, -10] }}
+            />
+          </>
+        )}
       </svg>
     </div>
   );

@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "evaluation-academy-v2",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\HP\\.claude\\projects\\evaluation-academy-v2 && npm run dev"
+      ],
+      "port": 3000
+    }
+  ]
+}

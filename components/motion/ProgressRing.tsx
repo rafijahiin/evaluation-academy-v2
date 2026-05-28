@@ -1,5 +1,5 @@
 "use client";
-import { m, useReducedMotion } from "motion/react";
+import { m } from "motion/react";
 
 type ProgressRingProps = {
   value: number; // 0–100
@@ -23,7 +23,6 @@ export function ProgressRing({
   label,
   className,
 }: ProgressRingProps) {
-  const reduced = useReducedMotion();
   const clamped = Math.min(100, Math.max(0, value));
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -52,7 +51,7 @@ export function ProgressRing({
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={circumference}
-          initial={reduced ? { strokeDashoffset: offset } : { strokeDashoffset: circumference }}
+          initial={{ strokeDashoffset: circumference }}
           whileInView={{ strokeDashoffset: offset }}
           viewport={{ once: true }}
           transition={{ duration: 1.4, ease: [0, 0.55, 0.45, 1] }}

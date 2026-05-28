@@ -1,5 +1,5 @@
 "use client";
-import { m, useReducedMotion } from "motion/react";
+import { m } from "motion/react";
 import type { ReactNode } from "react";
 
 type RevealProps = {
@@ -12,6 +12,12 @@ type RevealProps = {
 
 /**
  * Scroll-triggered fade + slide-up. Pairs with StaggerChildren for lists.
+ *
+ * Reduced-motion handling is delegated to the global MotionConfig in
+ * MotionProvider (`reducedMotion="user"`), which automatically disables
+ * animations for users with the OS preference set. We don't read
+ * useReducedMotion here because doing so during render breaks hydration —
+ * it returns different values on server vs first client paint.
  */
 export function Reveal({
   children,
@@ -20,11 +26,10 @@ export function Reveal({
   className,
   once = true,
 }: RevealProps) {
-  const reduced = useReducedMotion();
   return (
     <m.div
       className={className}
-      initial={reduced ? false : { opacity: 0, y }}
+      initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: "-80px" }}
       transition={{
