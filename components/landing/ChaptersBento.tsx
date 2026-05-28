@@ -31,17 +31,16 @@ export function ChaptersBento() {
         </div>
       </Reveal>
 
-      <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 auto-rows-[minmax(160px,auto)]">
+      <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {CHAPTERS.map((chapter, idx) => {
           const Icon = CHAPTER_ICONS[chapter.slug as keyof typeof CHAPTER_ICONS];
-          // First card spans 2 cols on lg
+          // First card (Preparation) is hero — spans 2 cols on lg for a clean
+          // bento: [01 wide][02]  / [03][04][05]
           const isHero = idx === 0;
           return (
             <StaggerItem
               key={chapter.slug}
-              className={cn(
-                isHero && "lg:col-span-2 lg:row-span-2",
-              )}
+              className={cn(isHero && "lg:col-span-2")}
             >
               <Link
                 href={`/learn/${chapter.slug}`}
