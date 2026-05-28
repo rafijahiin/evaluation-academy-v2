@@ -1,6 +1,10 @@
 /**
  * Progress tracking — localStorage-backed.
- * Schema: { lessonsCompleted: string[], examScore?: number, lastLessonSlug?: string }
+ *
+ * Two distinct concepts:
+ *   - **viewed**: the user opened the lesson (drives "Resume" only)
+ *   - **completed**: the user answered the inline QuizQuestion correctly
+ *     (drives the progress ring + Lesson complete pill)
  */
 "use client";
 import { useEffect, useState, useCallback } from "react";
@@ -8,10 +12,17 @@ import { useEffect, useState, useCallback } from "react";
 const KEY = "evalAcademy.v3";
 
 export type ProgressState = {
+  /** Lessons completed — by passing the inline QuizQuestion. */
   lessonsCompleted: string[];
+  /** Final exam score 0..1 */
   examScore?: number;
+  /** Per-chapter quiz score 0..1 */
+  chapterQuizScores?: Record<string, number>;
+  /** For the "Resume" CTA — last lesson viewed (NOT necessarily completed) */
   lastChapterSlug?: string;
   lastLessonSlug?: string;
+  /** Learner name for the certificate */
+  learnerName?: string;
   updatedAt?: number;
 };
 
@@ -37,7 +48,6 @@ function write(state: ProgressState) {
       KEY,
       JSON.stringify({ ...state, updatedAt: Date.now() }),
     );
-    // Broadcast so other listeners in the same tab refresh
     window.dispatchEvent(new CustomEvent("eval-academy-progress"));
   } catch {
     /* ignore quota errors */
@@ -58,13 +68,25 @@ export function useProgress() {
     };
   }, []);
 
-  const markComplete = useCallback(
-    (lessonSlug: string, chapterSlug?: string) => {
+  /** Mark a lesson as VIEWED (for "Resume" tracking). Does NOT add to lessonsCompleted. */
+  const markViewed = useCallback(
+    (lessonSlug: string, chapterSlug: string) => {
       const current = read();
-      if (!current.lessonsCompleted.includes(lessonSlug)) {
-        current.lessonsCompleted = [...current.lessonsCompleted, lessonSlug];
-      }
       current.lastLessonSlug = lessonSlug;
+      current.lastChapterSlug = chapterSlug;
+      write(current);
+    },
+    [],
+  );
+
+  /** Mark a lesson as COMPLETED — happens only when the inline QuizQuestion is answered correctly. */
+  const markComplete = useCallback(
+    (lessonKey: string, chapterSlug?: string) => {
+      const current = read();
+      if (!current.lessonsCompleted.includes(lessonKey)) {
+        current.lessonsCompleted = [...current.lessonsCompleted, lessonKey];
+      }
+      current.lastLessonSlug = lessonKey.split("/")[1] ?? current.lastLessonSlug;
       if (chapterSlug) current.lastChapterSlug = chapterSlug;
       write(current);
     },
@@ -77,11 +99,37 @@ export function useProgress() {
     write(current);
   }, []);
 
+  const setChapterQuizScore = useCallback(
+    (chapter: string, score: number) => {
+      const current = read();
+      current.chapterQuizScores = {
+        ...(current.chapterQuizScores ?? {}),
+        [chapter]: score,
+      };
+      write(current);
+    },
+    [],
+  );
+
+  const setLearnerName = useCallback((name: string) => {
+    const current = read();
+    current.learnerName = name;
+    write(current);
+  }, []);
+
   const reset = useCallback(() => {
     write(DEFAULT);
   }, []);
 
-  return { state, markComplete, setExamScore, reset };
+  return {
+    state,
+    markViewed,
+    markComplete,
+    setExamScore,
+    setChapterQuizScore,
+    setLearnerName,
+    reset,
+  };
 }
 
 export function computePercent(completed: number, total: number) {

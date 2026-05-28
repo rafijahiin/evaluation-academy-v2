@@ -6,6 +6,7 @@ import { useProgress } from "@/lib/progress";
 import { useEffect, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import type { LessonFrontmatter } from "@/content/lessons-manifest";
+import { LessonContextProvider } from "./LessonContext";
 
 /**
  * Serializable lesson metadata. The MDX component itself can't be
@@ -35,20 +36,15 @@ export function LessonShell({
   children,
 }: Props) {
   const chapter = CHAPTERS.find((c) => c.slug === lesson.chapter);
-  const { state, markComplete } = useProgress();
+  const { state, markViewed } = useProgress();
   const isCompleted = state.lessonsCompleted.includes(
     `${lesson.chapter}/${lesson.slug}`,
   );
 
-  // Mark this lesson as the "last lesson" so the navbar Resume goes back here
+  // Mark this lesson as VIEWED (for "Resume" tracking only).
+  // Actual completion happens when the inline QuizQuestion is answered correctly.
   useEffect(() => {
-    const key = `${lesson.chapter}/${lesson.slug}`;
-    if (state.lastLessonSlug !== lesson.slug) {
-      markComplete(key, lesson.chapter);
-    }
-    // Note: markComplete adds to lessonsCompleted as a side effect. We
-    // want "viewed" tracking — for now treat opening a lesson as completion.
-    // A future Task can split into views vs completions.
+    markViewed(lesson.slug, lesson.chapter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson.chapter, lesson.slug]);
 
@@ -148,8 +144,16 @@ export function LessonShell({
             )}
           </header>
 
-          {/* MDX body — rendered by the server page and passed as children */}
-          <div className="lesson-prose">{children}</div>
+          {/* MDX body — rendered by the server page and passed as children.
+              LessonContextProvider lets the inline <QuizQuestion> know which
+              lesson it belongs to, so a correct answer marks completion. */}
+          <div className="lesson-prose">
+            <LessonContextProvider
+              value={{ chapter: lesson.chapter, slug: lesson.slug }}
+            >
+              {children}
+            </LessonContextProvider>
+          </div>
 
           {/* Prev / next */}
           <nav className="mt-16 pt-6 border-t border-border flex flex-col sm:flex-row gap-3">

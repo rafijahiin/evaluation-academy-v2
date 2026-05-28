@@ -1,23 +1,18 @@
 "use client";
-import { useState } from "react";
-import { Check, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Check, X, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLessonContext } from "@/components/lesson/LessonContext";
+import { useProgress } from "@/lib/progress";
 
 type Choice = { id: string; label: string };
 
 /**
  * Inline quiz block at the end of a lesson.
  *
- *   <QuizQuestion
- *     question="Who is recruited first into the evaluation team?"
- *     choices={[
- *       { id: "a", label: "The Team Leader" },
- *       { id: "b", label: "The Young and Emerging Evaluator" },
- *       { id: "c", label: "The CPE Manager" },
- *     ]}
- *     answer="b"
- *     explanation="The YEE is brought on board immediately after the launch meeting..."
- *   />
+ * Reads the lesson context (chapter + slug). When the user picks the correct
+ * answer, the lesson is marked complete in localStorage. Without lesson
+ * context (e.g. if used outside a lesson) it just behaves as a stand-alone Q.
  */
 export function QuizQuestion({
   question,
@@ -33,6 +28,15 @@ export function QuizQuestion({
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const isCorrect = selected === answer;
+  const lesson = useLessonContext();
+  const { markComplete } = useProgress();
+
+  // When the user selects the correct answer inside a lesson, mark complete.
+  useEffect(() => {
+    if (revealed && isCorrect && lesson) {
+      markComplete(`${lesson.chapter}/${lesson.slug}`, lesson.chapter);
+    }
+  }, [revealed, isCorrect, lesson, markComplete]);
 
   return (
     <section className="my-8 rounded-2xl border border-border bg-white p-5 sm:p-6">
@@ -40,6 +44,12 @@ export function QuizQuestion({
         <span className="text-[10.5px] uppercase tracking-[0.14em] font-semibold text-un-700">
           Check your understanding
         </span>
+        {lesson && !revealed && (
+          <span className="ml-auto inline-flex items-center gap-1 text-[10.5px] text-ink-3 font-medium">
+            <Sparkles className="w-3 h-3" />
+            Answer correctly to complete this lesson
+          </span>
+        )}
       </div>
       <p className="text-[15.5px] font-medium text-ink-1 leading-relaxed mb-4">
         {question}
@@ -100,6 +110,23 @@ export function QuizQuestion({
         >
           <strong>{isCorrect ? "Correct." : "Not quite."}</strong>
           {explanation && <> {explanation}</>}
+          {lesson && isCorrect && (
+            <span className="block mt-1 text-[12px] font-medium opacity-90">
+              ✓ Lesson marked complete.
+            </span>
+          )}
+          {!isCorrect && (
+            <button
+              type="button"
+              onClick={() => {
+                setSelected(null);
+                setRevealed(false);
+              }}
+              className="block mt-2 text-[12.5px] font-semibold underline underline-offset-2 hover:opacity-80"
+            >
+              Try again
+            </button>
+          )}
         </div>
       )}
     </section>
