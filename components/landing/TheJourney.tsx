@@ -1,26 +1,94 @@
 "use client";
 import Link from "next/link";
 import { m } from "motion/react";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { CHAPTERS } from "@/content/chapters";
-import { CHAPTER_ICONS } from "@/components/illustrations/ChapterIcon";
 import {
   Reveal,
   StaggerChildren,
   StaggerItem,
 } from "@/components/motion/Reveal";
-import { cn } from "@/lib/utils";
 
 /**
- * "The Journey" — a 5-step horizontal timeline of the evaluation phases.
- * All cards are equal weight (same size, same type scale) so the journey
- * reads as a sequence, not a hierarchy. A gradient line connects them.
+ * "The Journey" — 5 equal-weight, colour-coded phase cards.
  *
- * Layout:
- *   Mobile  →  vertical stack with left vertical line
- *   Tablet  →  2-up grid
- *   Desktop →  5-up horizontal timeline with connecting line
+ * Each card:
+ *   • Solid accent colour background per chapter
+ *   • Giant italic numeral (decorative, ghosted)
+ *   • PHASE N label
+ *   • Title in Fraunces
+ *   • Hover: lift + tilt + numeral scale-up + corner arrow slide-in
+ *           + sheen overlay traverses left → right
+ *
+ * Layout: 5-up on desktop with a connecting gradient line; vertical
+ * stack on mobile.
  */
+
+type Palette = {
+  // Solid background
+  bg: string;
+  // Numeral colour (used for the giant decorative number)
+  numeral: string;
+  // Text colour (label, title, body)
+  text: string;
+  // Eyebrow / sublabel
+  eyebrow: string;
+  // Arrow + chip background
+  accent: string;
+  // Sheen line colour (used by the on-hover sweep)
+  sheen: string;
+};
+
+function paletteFor(accent: string): Palette {
+  switch (accent) {
+    case "un-blue":
+      return {
+        bg: "linear-gradient(135deg, #006FB7 0%, #004576 100%)",
+        numeral: "rgba(255,255,255,0.12)",
+        text: "#FFFFFF",
+        eyebrow: "rgba(207, 229, 244, 0.95)",
+        accent: "#9FC9E8",
+        sheen: "rgba(255,255,255,0.18)",
+      };
+    case "navy":
+      return {
+        bg: "linear-gradient(135deg, #0A2540 0%, #061c33 100%)",
+        numeral: "rgba(255,255,255,0.10)",
+        text: "#FFFFFF",
+        eyebrow: "rgba(159, 201, 232, 0.95)",
+        accent: "#9FC9E8",
+        sheen: "rgba(255,255,255,0.15)",
+      };
+    case "teal":
+      return {
+        bg: "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
+        numeral: "rgba(255,255,255,0.16)",
+        text: "#FFFFFF",
+        eyebrow: "rgba(204, 251, 241, 0.95)",
+        accent: "#CCFBF1",
+        sheen: "rgba(255,255,255,0.2)",
+      };
+    case "amber":
+      return {
+        bg: "linear-gradient(135deg, #F59E0B 0%, #B45309 100%)",
+        numeral: "rgba(255,255,255,0.18)",
+        text: "#FFFFFF",
+        eyebrow: "rgba(254, 243, 199, 0.95)",
+        accent: "#FEF3C7",
+        sheen: "rgba(255,255,255,0.22)",
+      };
+    default:
+      return {
+        bg: "linear-gradient(135deg, #006FB7 0%, #004576 100%)",
+        numeral: "rgba(255,255,255,0.12)",
+        text: "#FFFFFF",
+        eyebrow: "rgba(207, 229, 244, 0.95)",
+        accent: "#9FC9E8",
+        sheen: "rgba(255,255,255,0.18)",
+      };
+  }
+}
+
 export function TheJourney() {
   return (
     <section className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
@@ -43,9 +111,8 @@ export function TheJourney() {
             </span>
           </h2>
           <p className="text-ink-2 max-w-xl text-[16px] leading-relaxed">
-            Each phase is a chapter. Each chapter is a sequence of focused
-            lessons with a hands-on tool at the end. Walk the journey end to
-            end, or jump to the phase you need.
+            Each phase is a chapter. Walk the journey end to end, or jump to the
+            phase you need.
           </p>
         </div>
       </Reveal>
@@ -54,42 +121,27 @@ export function TheJourney() {
         {/* Connecting line — desktop horizontal */}
         <div
           aria-hidden
-          className="hidden lg:block absolute top-[64px] left-[10%] right-[10%] h-px pointer-events-none"
+          className="hidden lg:block absolute top-1/2 -translate-y-1/2 left-[4%] right-[4%] h-px pointer-events-none"
           style={{
             background:
-              "linear-gradient(90deg, transparent 0%, var(--un-blue-200) 14%, var(--teal) 50%, var(--amber) 86%, transparent 100%)",
-          }}
-        />
-        {/* Connecting line — mobile vertical */}
-        <div
-          aria-hidden
-          className="lg:hidden absolute top-[40px] bottom-[40px] left-[48px] w-px pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, var(--un-blue-200) 0%, var(--teal) 50%, var(--amber) 100%)",
+              "linear-gradient(90deg, transparent 0%, var(--un-blue-300) 10%, var(--teal) 50%, var(--amber) 90%, transparent 100%)",
+            opacity: 0.35,
           }}
         />
 
         <StaggerChildren
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6 lg:gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6 lg:gap-5 relative"
           delayStep={0.08}
         >
-          {CHAPTERS.map((chapter, idx) => {
-            const Icon = CHAPTER_ICONS[chapter.slug as keyof typeof CHAPTER_ICONS];
-            const accent = accentToken(chapter.accent);
+          {CHAPTERS.map((chapter) => {
+            const p = paletteFor(chapter.accent);
             return (
               <StaggerItem key={chapter.slug}>
-                <JourneyStep
+                <JourneyCard
                   number={chapter.number}
                   title={chapter.title}
-                  subtitle={chapter.subtitle}
-                  focus={chapter.focus}
-                  minutes={chapter.estimatedMinutes}
                   slug={chapter.slug}
-                  accent={accent}
-                  Icon={Icon}
-                  isFirst={idx === 0}
-                  isLast={idx === CHAPTERS.length - 1}
+                  palette={p}
                 />
               </StaggerItem>
             );
@@ -100,153 +152,159 @@ export function TheJourney() {
   );
 }
 
-type JourneyStepProps = {
+type CardProps = {
   number: number;
   title: string;
-  subtitle: string;
-  focus: string[];
-  minutes: number;
   slug: string;
-  accent: { ring: string; ink: string; soft: string };
-  Icon: (props: { size?: number; accent?: string }) => React.ReactElement;
-  isFirst: boolean;
-  isLast: boolean;
+  palette: Palette;
 };
 
-function JourneyStep({
-  number,
-  title,
-  subtitle,
-  focus,
-  minutes,
-  slug,
-  accent,
-  Icon,
-  isFirst,
-  isLast,
-}: JourneyStepProps) {
+function JourneyCard({ number, title, slug, palette }: CardProps) {
   return (
-    <Link
-      href={`/learn/${slug}`}
-      className={cn(
-        "group relative flex lg:flex-col gap-4 lg:gap-0 lg:text-center lg:items-center",
-        "rounded-2xl bg-white border border-border p-5 lg:p-5",
-        "transition-all duration-300 hover:border-un-200 hover:-translate-y-1 hover:shadow-bloom",
-      )}
+    <m.div
+      whileHover="hover"
+      initial="rest"
+      animate="rest"
+      className="relative"
     >
-      {/* Circle with chapter numeral — same size every card */}
-      <div className="relative shrink-0">
-        {/* outer pulse on first card */}
-        {isFirst && (
-          <m.div
-            aria-hidden
-            className="absolute inset-0 rounded-full"
-            style={{ background: accent.ink }}
-            animate={{ opacity: [0.25, 0, 0.25], scale: [1, 1.7, 1] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
-          />
-        )}
-        <div
-          className="relative w-[80px] h-[80px] rounded-full flex items-center justify-center bg-white border-2 transition-colors duration-300 group-hover:scale-105"
+      <Link
+        href={`/learn/${slug}`}
+        className="group relative block aspect-[4/5] rounded-3xl overflow-hidden"
+        style={{
+          background: palette.bg,
+          // Inner shadow + subtle border highlight for depth
+          boxShadow:
+            "0 1px 0 rgba(255,255,255,0.18) inset, 0 12px 30px -12px rgba(15,23,42,0.45)",
+        }}
+      >
+        {/* Sheen sweep on hover */}
+        <m.div
+          aria-hidden
+          className="absolute inset-y-0 pointer-events-none"
           style={{
-            borderColor: accent.ring,
-            boxShadow: `0 0 0 8px var(--surface-0), 0 8px 20px ${accent.soft}`,
+            width: "55%",
+            background: `linear-gradient(105deg, transparent 0%, ${palette.sheen} 50%, transparent 100%)`,
+            filter: "blur(2px)",
           }}
-        >
-          <span
-            className="font-display font-medium text-[34px] leading-none italic"
-            style={{ color: accent.ink }}
-          >
-            {String(number).padStart(2, "0")}
-          </span>
-        </div>
-      </div>
+          variants={{
+            rest: { x: "-130%", opacity: 0 },
+            hover: { x: "230%", opacity: 1 },
+          }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        />
 
-      {/* content */}
-      <div className="flex-1 lg:mt-6 min-w-0">
-        <div className="flex items-center lg:justify-center gap-2 mb-2">
-          <Icon size={20} accent={accent.ink} />
-          <span
-            className="text-[10.5px] uppercase tracking-[0.14em] font-semibold"
-            style={{ color: accent.ink }}
-          >
-            Phase {number}
-          </span>
-        </div>
-        <h3
-          className="font-display text-[24px] lg:text-[22px] leading-[1.1] tracking-[-0.01em] text-ink-1"
-          style={{ fontWeight: 500 }}
+        {/* Giant decorative numeral (background layer) */}
+        <m.div
+          aria-hidden
+          className="absolute font-display italic font-medium leading-none pointer-events-none select-none"
+          style={{
+            color: palette.numeral,
+            fontSize: "260px",
+            top: "-18px",
+            right: "-22px",
+            // tightening for italic numerals
+            letterSpacing: "-0.02em",
+          }}
+          variants={{
+            rest: { scale: 1, rotate: 0 },
+            hover: { scale: 1.08, rotate: -3 },
+          }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          {title}
-        </h3>
-        <p className="mt-2 text-[13.5px] text-ink-2 leading-relaxed lg:px-1">
-          {subtitle}
-        </p>
+          {String(number).padStart(2, "0")}
+        </m.div>
 
-        {/* focus pills */}
-        <div className="mt-3 flex flex-wrap gap-1.5 lg:justify-center">
-          {focus.slice(0, 3).map((f) => (
-            <span
-              key={f}
-              className="text-[10.5px] px-2 py-0.5 rounded-full bg-surface-2 text-ink-3 font-medium"
+        {/* Subtle radial sheen on top-left to lift the surface */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(120% 80% at 10% 0%, rgba(255,255,255,0.18) 0%, transparent 55%)",
+            mixBlendMode: "soft-light",
+          }}
+        />
+
+        {/* Content overlay */}
+        <div className="relative h-full flex flex-col justify-between p-6 sm:p-7">
+          {/* top */}
+          <div>
+            {/* small foreground numeral (italic) */}
+            <m.div
+              className="font-display italic font-medium leading-none text-[44px] sm:text-[52px]"
+              style={{ color: palette.text }}
+              variants={{
+                rest: { x: 0 },
+                hover: { x: 3 },
+              }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
-              {f}
-            </span>
-          ))}
+              {String(number).padStart(2, "0")}
+            </m.div>
+            <div
+              className="mt-3 inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[10px] uppercase tracking-[0.14em] font-semibold"
+              style={{
+                color: palette.eyebrow,
+                background: "rgba(255,255,255,0.10)",
+                border: "1px solid rgba(255,255,255,0.18)",
+              }}
+            >
+              <span
+                aria-hidden
+                className="w-1 h-1 rounded-full"
+                style={{ background: palette.accent }}
+              />
+              Phase {number}
+            </div>
+          </div>
+
+          {/* bottom: title + arrow */}
+          <div>
+            <m.h3
+              className="font-display tracking-[-0.01em] leading-[1.02] text-[28px] sm:text-[34px]"
+              style={{ color: palette.text, fontWeight: 500 }}
+              variants={{
+                rest: { y: 0 },
+                hover: { y: -2 },
+              }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {title}
+            </m.h3>
+
+            <m.div
+              className="mt-4 inline-flex items-center justify-center w-10 h-10 rounded-full"
+              style={{
+                background: "rgba(255,255,255,0.16)",
+                color: palette.text,
+                border: "1px solid rgba(255,255,255,0.25)",
+              }}
+              variants={{
+                rest: { x: 0, rotate: -10, scale: 1 },
+                hover: { x: 4, rotate: 0, scale: 1.08 },
+              }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <ArrowUpRight className="w-4 h-4" strokeWidth={2.4} />
+            </m.div>
+          </div>
         </div>
 
-        {/* time + arrow */}
-        <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between lg:justify-center lg:gap-3">
-          <span className="inline-flex items-center gap-1 text-[11px] text-ink-3 font-medium">
-            <Clock className="w-3 h-3" />
-            {minutes} min
-          </span>
-          <span
-            className="inline-flex items-center justify-center w-7 h-7 rounded-full border border-border lg:hidden group-hover:border-un-300 group-hover:bg-un-50 transition-colors"
-          >
-            <ArrowUpRight
-              className="w-3.5 h-3.5 text-ink-2 group-hover:text-un-700"
-              strokeWidth={2.2}
-            />
-          </span>
-        </div>
-      </div>
-    </Link>
+        {/* Outer hover lift (CSS-side, parallel to motion) */}
+        <m.div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none rounded-3xl"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%)",
+          }}
+          variants={{
+            rest: { opacity: 0 },
+            hover: { opacity: 1 },
+          }}
+          transition={{ duration: 0.35 }}
+        />
+      </Link>
+    </m.div>
   );
-}
-
-function accentToken(accent: string) {
-  // Returns ring border + dark ink + soft shadow color
-  switch (accent) {
-    case "un-blue":
-      return {
-        ring: "var(--un-blue-200)",
-        ink: "var(--un-blue)",
-        soft: "rgba(0,111,183,0.18)",
-      };
-    case "navy":
-      return {
-        ring: "rgba(10,37,64,0.25)",
-        ink: "var(--un-blue-900)",
-        soft: "rgba(10,37,64,0.16)",
-      };
-    case "teal":
-      return {
-        ring: "rgba(20,184,166,0.35)",
-        ink: "var(--teal)",
-        soft: "rgba(20,184,166,0.18)",
-      };
-    case "amber":
-      return {
-        ring: "rgba(245,158,11,0.4)",
-        ink: "var(--amber)",
-        soft: "rgba(245,158,11,0.2)",
-      };
-    default:
-      return {
-        ring: "var(--un-blue-200)",
-        ink: "var(--un-blue)",
-        soft: "rgba(0,111,183,0.18)",
-      };
-  }
 }
