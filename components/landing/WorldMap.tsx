@@ -76,11 +76,12 @@ export function WorldMap() {
       .then((r) => r.json())
       .then((topo) => {
         if (cancelled) return;
-        // Topology has `objects.countries`; extract as a FeatureCollection
+        // Topology has `objects.countries`; extract as a FeatureCollection.
+        // topojson-client's types are union-shaped — cast through unknown.
         const fc = feature(
           topo,
           topo.objects.countries,
-        ) as FeatureCollection<Geometry>;
+        ) as unknown as FeatureCollection<Geometry>;
         setFeatures(fc.features);
       })
       .catch(() => {

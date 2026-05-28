@@ -13,7 +13,11 @@ const nextConfig: NextConfig = {
 // Turbopack requires string-form plugin specs (not function references)
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [["remark-gfm"]],
+    remarkPlugins: [
+      ["remark-frontmatter"],
+      ["remark-mdx-frontmatter", { name: "frontmatter" }],
+      ["remark-gfm"],
+    ],
     rehypePlugins: [
       ["rehype-slug"],
       [

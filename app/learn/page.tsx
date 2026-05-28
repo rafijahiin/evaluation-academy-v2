@@ -1,22 +1,33 @@
-import { Reveal } from "@/components/motion/Reveal";
+import { CHAPTERS } from "@/content/chapters";
+import { LESSONS } from "@/content/lessons-manifest";
+import { DashboardClient } from "@/components/dashboard/DashboardClient";
 
-export const metadata = { title: "Course dashboard" };
+export const metadata = {
+  title: "Your course dashboard",
+  description: "Track progress across the 5-phase evaluation journey.",
+};
 
-export default function LearnPage() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-      <Reveal>
-        <span className="text-[11px] uppercase tracking-[0.16em] text-un-700 font-semibold">
-          Dashboard
-        </span>
-        <h1 className="font-display mt-2 text-[clamp(34px,5vw,52px)] leading-[1.04] tracking-[-0.02em] text-ink-1">
-          Your course
-        </h1>
-        <p className="mt-4 text-ink-2 max-w-xl">
-          Dashboard coming soon — the bento chapter grid and progress ring will
-          live here. For now, you can dive into a phase from the homepage.
-        </p>
-      </Reveal>
-    </div>
-  );
+export default function DashboardPage() {
+  // Pre-compute lesson counts per chapter at build time so the client side
+  // only has to read localStorage for completion state.
+  const chapterStats = CHAPTERS.map((c) => {
+    const lessons = LESSONS.filter((l) => l.chapter === c.slug).sort(
+      (a, b) => a.frontmatter.order - b.frontmatter.order,
+    );
+    return {
+      slug: c.slug,
+      number: c.number,
+      title: c.title,
+      subtitle: c.subtitle,
+      tagline: c.tagline,
+      focus: c.focus,
+      accent: c.accent,
+      estimatedMinutes: c.estimatedMinutes,
+      totalLessons: lessons.length,
+      firstLessonHref: lessons[0]?.href ?? `/learn/${c.slug}`,
+      lessonSlugs: lessons.map((l) => `${l.chapter}/${l.slug}`),
+    };
+  });
+
+  return <DashboardClient chapters={chapterStats} totalLessons={LESSONS.length} />;
 }
