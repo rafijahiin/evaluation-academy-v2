@@ -2,9 +2,9 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  // Static export for Vercel CDN
-  output: "export",
-  // Allow .mdx files as pages
+  // Vercel handles Next.js deployment natively — no explicit `output: 'export'`
+  // needed. Every page in this project uses generateStaticParams() so the
+  // pages still get prerendered at build time and served from Vercel's edge.
   pageExtensions: ["ts", "tsx", "mdx"],
   images: { unoptimized: true },
   trailingSlash: false,
