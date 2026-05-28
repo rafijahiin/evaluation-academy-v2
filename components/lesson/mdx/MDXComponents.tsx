@@ -4,6 +4,7 @@ import { KeyTerms, Term } from "./KeyTerms";
 import { InPractice } from "./InPractice";
 import { Checklist, Item } from "./Checklist";
 import { QuizQuestion } from "./QuizQuestion";
+import { TriangulationDiagram } from "./TriangulationDiagram";
 
 /**
  * Components exposed inside .mdx lessons. Imported via MDXProvider in
@@ -20,6 +21,7 @@ export const mdxComponents = {
   Checklist,
   Item,
   QuizQuestion,
+  TriangulationDiagram,
   // typography overrides — give MDX-rendered prose the same look as v1
   h1: (props: React.ComponentProps<"h1">) => (
     <h1

@@ -1,46 +1,82 @@
 ---
-title: ".3 Surveys"
+title: "Surveys"
 order: 5
-originalTitle: "3.2.3 Surveys"
-lede: "When the question is 'how many', surveys are the answer. UNFPA CPEs use them selectively, where representative quantitative claims are needed."
+originalTitle: "3.2.3 Survey"
+lede: "A well-designed survey lets the team hear from many more rights-holders and partners than interviews ever could. The trade-off: it takes serious care to design the questionnaire, manage logistics, and analyse the data without over-claiming."
+handbookSection: "3.2.3"
+handbookPages: "56–57"
 estimatedMinutes: 8
 ---
 
-<p>Surveys produce quantitative evidence from a structured sample. In a CPE, surveys are typically used for:</p>
+<Callout variant="key" title="What a survey adds to the mixed-methods package">
+A survey collects data from a sample of the broader population targeted by the evaluation. When the sample is randomly selected, findings can be generalised — within statistical bounds — to the population the respondents are drawn from. In a CPE, surveys are particularly suited to assessing **rights-holders' satisfaction** with specific UNFPA-supported services.
+</Callout>
 
-<ul>
-<li>Beneficiary surveys to assess reach and satisfaction</li>
-<li>KAP (knowledge, attitudes, practices) surveys among target populations</li>
-<li>Service provider surveys to assess capacity and quality</li>
-<li>Partner surveys to assess coordination and value-added</li>
-</ul>
+<h3>Building the questionnaire</h3>
 
-<h3>Sampling considerations</h3>
+A survey questionnaire usually combines two question types:
 
 <KVGrid>
-  <KV title="Probabilistic sampling">When generalisation to a population is needed — simple random, stratified, cluster, multi-stage.</KV>
+  <KV title="Structured (closed) questions">Respondents choose from a predetermined set of responses. Aim: facts, agreement or disagreement, opinions on assertions. Allow statistical analysis — counts, percentages, distributions.</KV>
 
-  <KV title="Purposive sampling">When the goal is depth or specific sub-populations — less common in surveys.</KV>
-
-  <KV title="Sample size">Calculated against the precision needed for key indicators; documented in the design report.</KV>
-
-  <KV title="Disaggregation">By sex, age, disability, geography, marginalisation — both at sampling and analysis stages.</KV>
-
+  <KV title="A few open-ended questions">Allow variety and depth in response. Yield richer, more precise information — but less amenable to statistical analysis. Typical openers: "why", "how", "what", "describe", "tell me about", "what do you think about".</KV>
 </KVGrid>
 
-<h3>Equity in sampling</h3>
+<h3>Administration modes</h3>
 
-<p>The handbook is explicit that sampling must actively reach groups that standard sampling frames miss — people without phones, without national IDs, in marginalised geographies, in linguistic minorities. The design report must document who is systematically excluded by the chosen sampling frame and how the team addresses that.</p>
+Surveys can be administered in many ways: **in-person on paper** (e.g. during site visits), via mail, by web (SurveyMonkey, KoboCollect), by phone, or — for hard-to-reach populations — by SMS. Whatever the mode, the team has to think from the respondent's perspective about what will maximise participation:
 
-<h3>Instrument design</h3>
+<KVGrid>
+  <KV title="Accessibility">Can the intended respondent actually receive and complete this survey? SMS may reach where the web cannot.</KV>
 
-<ul>
-<li>Questions derived directly from the evaluation matrix's assumptions and indicators</li>
-<li>Cognitive testing of the instrument before full deployment</li>
-<li>Translation into local languages with back-translation for accuracy</li>
-<li>Pre-testing on a small sample to refine question wording and flow</li>
-</ul>
+  <KV title="Format convenience">Time to complete; design clarity; question flow; ease of response.</KV>
 
-<Callout variant="key" title="Surveys complement, not replace">
-In UNFPA CPEs, surveys are usually one method among several. Quantitative survey data is combined with qualitative interview and FGD data to support triangulated findings.
+  <KV title="Purpose clarity">The cover note tells the respondent why this matters, who's asking, and what happens with their answers.</KV>
+
+  <KV title="Wording and length">Long surveys lose respondents. Cut to what the matrix actually needs verified.</KV>
+</KVGrid>
+
+<h3>Analysing the data</h3>
+
+Once survey data is in, analysis looks for **relationships, patterns, and trends**. It may involve comparison with data from other groups. When both quantitative (closed questions) and qualitative (open-ended) survey data are analysed together, the team can:
+
+- **Quantify and compare the importance of diverse opinions** — count how many respondents share a view.
+- **Check whether the population agrees or not** with positions surfaced in interviews, and in what proportions.
+- **Analyse rights-holders' degree of satisfaction** with specific UNFPA-supported services.
+
+<Callout variant="warn" title="The sample-size guarantee">
+The evaluation team must verify that **the sample of surveyed informants is large enough and representative** of the targeted population. A small, biased sample wrapped in survey rigour is more misleading than a few honest interviews — because the numbers create false confidence. Sample size, response rate, and any non-response bias must be documented in the matrix and the eventual report.
 </Callout>
+
+<h3>Where surveys fit (and where they don't)</h3>
+
+A well-prepared survey is **cost-effective and time-efficient**, freeing evaluators to dedicate time to other more time-consuming tasks. But Table 10 (lesson 2.2.3) flags real limitations:
+
+<KVGrid>
+  <KV title="Survey strengths">Affordable; yields quantified and reliable data; useful to identify changes and make comparisons; reaches a large number of persons; respondents may be more honest if the survey is not administered in person; highly accessible/convenient for many respondents.</KV>
+
+  <KV title="Survey limitations">Implementation time can exceed the CPE data-collection window; analysis takes time; representative sampling is difficult; high abandonment rates if the questionnaire is unfriendly; some vulnerable groups may not have easy access; in humanitarian settings (displacement, hard-to-reach areas, insecurity) extensive surveys may not be feasible.</KV>
+</KVGrid>
+
+<InPractice country="A practical pattern">
+Many CPEs use surveys for narrow, high-volume questions — satisfaction with a specific service, awareness of a campaign, take-up of a commodity — and rely on KIIs and FGDs for the strategic, contextual, and unintended-effect material. The matrix should be explicit about which evaluation question each method serves; otherwise the team risks doing a small, low-power survey instead of doing what the question actually needed.
+</InPractice>
+
+<KeyTerms>
+  <Term name="Structured question">A closed question with a fixed response set — the workhorse of quantitative survey analysis.</Term>
+  <Term name="Open-ended question">A free-text question yielding qualitative content — used sparingly in surveys because it doesn't aggregate cleanly.</Term>
+  <Term name="Representative sample">A sample drawn so that its characteristics match the targeted population — required for findings to be generalisable.</Term>
+  <Term name="Response rate">The proportion of invited respondents who actually completed the survey. Low response rates can indicate non-response bias.</Term>
+</KeyTerms>
+
+<QuizQuestion
+  question="Which is true about the role of surveys in a CPE?"
+  choices={[
+    { id: "a", label: "Surveys replace interviews wherever possible, since they are cheaper" },
+    { id: "b", label: "Surveys are particularly suited to analysing rights-holders' satisfaction with specific UNFPA-supported services — but the team must verify sample size and representativeness" },
+    { id: "c", label: "Surveys are mandatory in every CPE" },
+    { id: "d", label: "Surveys must always be administered in person on paper" },
+  ]}
+  answer="b"
+  explanation="Per section 3.2.3, surveys are particularly suited to satisfaction-style questions about UNFPA services. Their value depends on sample size, representativeness, and a well-designed questionnaire — without those, the numbers create false confidence."
+/>

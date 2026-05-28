@@ -250,9 +250,15 @@ export const LESSONS: LessonEntry[] = [
     frontmatter: {
       "title": "Preparing the field phase — logistics",
       "order": 1,
-      "originalTitle": "3.1 Preparing the field phase — logistics",
-      "lede": "Fieldwork goes well when the CPE Manager has thought of everything. It goes badly when one logistical detail was missed.",
-      "estimatedMinutes": 8
+      "originalTitle": "3.1.1 Logistics",
+      "lede": "By the time the evaluation team boards their flight, the CPE Manager has built a complete operational machine — vehicles, permits, interpreters, security briefings, accommodation, and stakeholder appointments. The team's three weeks of fieldwork only work if this scaffolding holds.",
+      "handbookSection": "3.1.1",
+      "handbookPages": "47–49",
+      "estimatedMinutes": 9,
+      "unegRefs": [
+        "WHO ethical and safety recommendations for researching SGBV (2007, 2016)",
+        "UNDSS security requirements"
+      ]
     },
     Component: fieldwork_01_preparing_the_field_phase_logistics,
   },
@@ -261,11 +267,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "02-2-the-kick-off-meeting",
     href: "/learn/fieldwork/02-2-the-kick-off-meeting",
     frontmatter: {
-      "title": ".2 The kick-off meeting",
+      "title": "The evaluation team kick-off meeting",
       "order": 2,
-      "originalTitle": "3.1.2 The kick-off meeting",
-      "lede": "Before the first interview, the team holds a kick-off meeting. It is part operational briefing, part final calibration.",
-      "estimatedMinutes": 8
+      "originalTitle": "3.1.2 Evaluation team kick-off meeting",
+      "lede": "At the start of the field phase, the CPE Manager pulls the team together one more time. Roles, tools, communication channels, and the rhythm of team meetings are all confirmed before the first interview happens.",
+      "handbookSection": "3.1.2",
+      "handbookPages": "50",
+      "estimatedMinutes": 4
     },
     Component: fieldwork_02_2_the_kick_off_meeting,
   },
@@ -274,11 +282,17 @@ export const LESSONS: LessonEntry[] = [
     slug: "03-1-key-informant-interviews",
     href: "/learn/fieldwork/03-1-key-informant-interviews",
     frontmatter: {
-      "title": ".1 Key informant interviews",
+      "title": "Key informant interviews",
       "order": 3,
       "originalTitle": "3.2.1 Key informant interviews",
-      "lede": "Most of the evidence in a CPE comes from key informant interviews. Done well, they are precise instruments. Done badly, they are dinner-party conversations.",
-      "estimatedMinutes": 8
+      "lede": "The interview is the CPE's workhorse method. It's how evaluators surface what documents won't reveal: stakeholders' perspectives on what works, what doesn't, what's unintended, and why.",
+      "handbookSection": "3.2.1",
+      "handbookPages": "51–54",
+      "estimatedMinutes": 11,
+      "unegRefs": [
+        "BetterEvaluation — Interviews overview",
+        "Methods and data sources for remote data collection during COVID-19"
+      ]
     },
     Component: fieldwork_03_1_key_informant_interviews,
   },
@@ -287,11 +301,17 @@ export const LESSONS: LessonEntry[] = [
     slug: "04-2-group-interviews-and-focus-group-discussions",
     href: "/learn/fieldwork/04-2-group-interviews-and-focus-group-discussions",
     frontmatter: {
-      "title": ".2 Group interviews and focus group discussions",
+      "title": "Group interviews and focus group discussions",
       "order": 4,
       "originalTitle": "3.2.2 Group interviews and focus group discussions",
-      "lede": "When the question is about norms, dynamics, contested views, or collective experience — the group can tell you what no single person could.",
-      "estimatedMinutes": 8
+      "lede": "Group methods surface what individuals won't say alone. They reveal the collective perspective of a stakeholder community — and they're often the only practical way to hear from rights-holders at scale.",
+      "handbookSection": "3.2.2",
+      "handbookPages": "54–56",
+      "estimatedMinutes": 9,
+      "unegRefs": [
+        "WHO ethical and safety recommendations for SGBV research (2007, 2016)",
+        "UNICEF Guidance note on adolescent participation in monitoring and evaluation (2019)"
+      ]
     },
     Component: fieldwork_04_2_group_interviews_and_focus_group_discussions,
   },
@@ -300,10 +320,12 @@ export const LESSONS: LessonEntry[] = [
     slug: "05-3-surveys",
     href: "/learn/fieldwork/05-3-surveys",
     frontmatter: {
-      "title": ".3 Surveys",
+      "title": "Surveys",
       "order": 5,
-      "originalTitle": "3.2.3 Surveys",
-      "lede": "When the question is 'how many', surveys are the answer. UNFPA CPEs use them selectively, where representative quantitative claims are needed.",
+      "originalTitle": "3.2.3 Survey",
+      "lede": "A well-designed survey lets the team hear from many more rights-holders and partners than interviews ever could. The trade-off: it takes serious care to design the questionnaire, manage logistics, and analyse the data without over-claiming.",
+      "handbookSection": "3.2.3",
+      "handbookPages": "56–57",
       "estimatedMinutes": 8
     },
     Component: fieldwork_05_3_surveys,
@@ -313,11 +335,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "06-4-on-site-observation",
     href: "/learn/fieldwork/06-4-on-site-observation",
     frontmatter: {
-      "title": ".4 On-site observation",
+      "title": "On-site observation",
       "order": 6,
       "originalTitle": "3.2.4 On-site observation",
-      "lede": "What people do is sometimes different from what they say. On-site observation is the method that captures the difference.",
-      "estimatedMinutes": 8
+      "lede": "Observation lets the evaluation team see what's actually happening at the places UNFPA supports — not what people say is happening. It's how reported activity is checked against lived reality.",
+      "handbookSection": "3.2.4",
+      "handbookPages": "57–59",
+      "estimatedMinutes": 7
     },
     Component: fieldwork_06_4_on_site_observation,
   },
@@ -326,11 +350,18 @@ export const LESSONS: LessonEntry[] = [
     slug: "07-5-photography-during-data-collection",
     href: "/learn/fieldwork/07-5-photography-during-data-collection",
     frontmatter: {
-      "title": ".5 Photography during data collection",
+      "title": "Photography during data collection",
       "order": 7,
       "originalTitle": "3.2.5 Photography during data collection",
-      "lede": "Photographs are evidence — and they are also communication. The handbook treats photography as part of the data collection toolkit, with its own ethics.",
-      "estimatedMinutes": 8
+      "lede": "Photographs give the evaluation a human face. Used carefully, they make findings more memorable, support communication, and humanise UNFPA's work — but consent, dignity, and privacy aren't negotiable.",
+      "handbookSection": "3.2.5",
+      "handbookPages": "61",
+      "estimatedMinutes": 5,
+      "unegRefs": [
+        "UNFPA multimedia consent form",
+        "UN system guidelines on photos (adapted for UNFPA)",
+        "UNICEF ethical guidelines on reporting on children and young people"
+      ]
     },
     Component: fieldwork_07_5_photography_during_data_collection,
   },
@@ -339,11 +370,13 @@ export const LESSONS: LessonEntry[] = [
     slug: "08-the-analysis-workshop-and-debriefing-meeting",
     href: "/learn/fieldwork/08-the-analysis-workshop-and-debriefing-meeting",
     frontmatter: {
-      "title": "The analysis workshop and debriefing meeting",
+      "title": "The evaluation matrix, analysis workshop, and debriefing",
       "order": 8,
-      "originalTitle": "3.4 The analysis workshop and debriefing meeting",
-      "lede": "Fieldwork doesn't end at the last interview. It ends with two structured events — one internal, one external — that turn raw data into preliminary findings.",
-      "estimatedMinutes": 8
+      "originalTitle": "3.3 and 3.4 — Evaluation matrix during fieldwork; analysis workshop and debriefing",
+      "lede": "The end of the field phase isn't the end of fieldwork — it's the start of analysis. The matrix gets consolidated, triangulation gets pressure-tested, preliminary findings get presented to the ERG, and the team agrees what still needs follow-up before reporting begins.",
+      "handbookSection": "3.3 and 3.4",
+      "handbookPages": "62–65",
+      "estimatedMinutes": 12
     },
     Component: fieldwork_08_the_analysis_workshop_and_debriefing_meeting,
   },
