@@ -558,8 +558,13 @@ export const LESSONS: LessonEntry[] = [
       "title": "Developing the findings",
       "order": 1,
       "originalTitle": "4.1 Developing the findings",
-      "lede": "A finding is not an observation. It is a statement supported by triangulated evidence that answers — or partially answers — an evaluation question.",
-      "estimatedMinutes": 11
+      "lede": "Findings are not opinions and not summaries. They are evidence-based, triangulated responses to the evaluation questions — built from the matrix, tested against internal validity checks, and traceable back to specific data the team collected.",
+      "handbookSection": "4.1",
+      "handbookPages": "70–71",
+      "estimatedMinutes": 9,
+      "unegRefs": [
+        "Mayne, John (2008). Contribution Analysis: An approach to exploring cause and effect"
+      ]
     },
     Component: reporting_01_developing_the_findings,
   },
@@ -571,8 +576,10 @@ export const LESSONS: LessonEntry[] = [
       "title": "Establishing the conclusions",
       "order": 2,
       "originalTitle": "4.2 Establishing the conclusions",
-      "lede": "Findings answer evaluation questions. Conclusions synthesise across findings to answer the bigger questions the CPE was commissioned to address.",
-      "estimatedMinutes": 11
+      "lede": "Conclusions are where the evaluators do the work of judgement. Drawing on findings — never just summarising them — they synthesise what the country programme has done well, where it has fallen short, and why. Conclusions don't propose action. That comes in the next chapter.",
+      "handbookSection": "4.2",
+      "handbookPages": "71–72",
+      "estimatedMinutes": 8
     },
     Component: reporting_02_establishing_the_conclusions,
   },
@@ -584,8 +591,10 @@ export const LESSONS: LessonEntry[] = [
       "title": "Co-creating the recommendations",
       "order": 3,
       "originalTitle": "4.3 Co-creating the recommendations",
-      "lede": "The handbook's most distinctive procedural step. Recommendations are not drafted by the team alone. They are co-created with the ERG in a structured five-step process that culminates in a workshop.",
-      "estimatedMinutes": 11
+      "lede": "Recommendations aren't handed down by the evaluation team. They emerge from a structured five-step process involving the team and the ERG — built into a worksheet, refined through a workshop, and inserted into the final report only after stakeholder agreement on wording.",
+      "handbookSection": "4.3",
+      "handbookPages": "73",
+      "estimatedMinutes": 10
     },
     Component: reporting_03_co_creating_the_recommendations,
   },
@@ -594,10 +603,12 @@ export const LESSONS: LessonEntry[] = [
     slug: "04-drafting-the-cpe-report-v1-and-v2",
     href: "/learn/reporting/04-drafting-the-cpe-report-v1-and-v2",
     frontmatter: {
-      "title": "Drafting the CPE report (v1 and v2)",
+      "title": "Drafting the CPE report — versions 1 and 2",
       "order": 4,
-      "originalTitle": "4.4 Drafting the CPE report (v1 and v2)",
-      "lede": "Like the design report, the CPE report comes in two versions. Each is quality-assured, presented to the ERG, and revised. The pace and structure are exact.",
+      "originalTitle": "4.4 Drafting the country programme evaluation report",
+      "lede": "Writing the CPE report is iterative. Two versions, two QA cycles, one ERG meeting, one recommendations workshop. Between v1 and v2, the report transforms from a draft of findings-and-conclusions into the final publishable document with co-created recommendations.",
+      "handbookSection": "4.4",
+      "handbookPages": "74–77",
       "estimatedMinutes": 11
     },
     Component: reporting_04_drafting_the_cpe_report_v1_and_v2,
@@ -610,7 +621,9 @@ export const LESSONS: LessonEntry[] = [
       "title": "Structure of the evaluation report",
       "order": 5,
       "originalTitle": "4.5 Structure of the evaluation report",
-      "lede": "The structure of the final CPE report is prescribed. Following it is not optional — it is what makes the report legible across UNFPA and comparable across evaluations.",
+      "lede": "A long document only works if its bones are clean. Section 4.5 sets out the chapter-by-chapter outline, the recommended page lengths, and the quality-assurance criteria for each part — so the report can be navigated, judged, and used.",
+      "handbookSection": "4.5",
+      "handbookPages": "78–84",
       "estimatedMinutes": 11
     },
     Component: reporting_05_structure_of_the_evaluation_report,
