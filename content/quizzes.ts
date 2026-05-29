@@ -27,10 +27,10 @@ export const STAGE_QUIZ: Question[] = [
     "source": "stage",
     "question": "What is the UNFPA Evaluation Handbook (2024) specifically a methodological guide for?",
     "options": [
-      "All types of evaluations across the UN system",
+      "Any decentralized evaluation commissioned by a country office",
       "Country Programme Evaluations (CPEs) — decentralized evaluations at country office level",
-      "Audit and compliance reviews",
-      "Strategic Plan evaluations only"
+      "Mid-term and final project evaluations of UNFPA-implemented projects",
+      "Both centralized (IEO-led) and decentralized evaluations within UNFPA"
     ],
     "correct": 1,
     "weight": 2
@@ -42,10 +42,10 @@ export const STAGE_QUIZ: Question[] = [
     "source": "stage",
     "question": "In the UNFPA CPE methodology, recruitment of the evaluation team happens in TWO stages. Stage one is the recruitment of:",
     "options": [
-      "The team leader",
-      "The national consultant",
+      "The international team leader",
+      "All national thematic consultants",
       "The Young and Emerging Evaluator (YEE)",
-      "The reference group chair"
+      "The CO communication officer who will support dissemination"
     ],
     "correct": 2,
     "weight": 2
@@ -72,10 +72,10 @@ export const STAGE_QUIZ: Question[] = [
     "source": "stage",
     "question": "Why does UNFPA exclude 'impact' from the standard CPE criteria?",
     "options": [
-      "Impact is not important",
-      "It is too political to assess",
+      "It is already covered indirectly through the effectiveness criterion",
+      "The Strategic Plan evaluation assesses impact at corporate level instead",
       "Impact requires a different time frame and methodology beyond the CPE's scope",
-      "It overlaps with sustainability"
+      "It overlaps too much with the sustainability criterion to add value"
     ],
     "correct": 2,
     "weight": 2
@@ -87,10 +87,10 @@ export const STAGE_QUIZ: Question[] = [
     "source": "stage",
     "question": "The UNFPA CPE methodology is best described as:",
     "options": [
-      "A randomised controlled trial",
+      "A quasi-experimental impact evaluation using difference-in-differences",
       "A theory-based contribution analysis",
-      "A pure attribution evaluation",
-      "An audit-based assessment"
+      "An attribution evaluation isolating UNFPA's causal effect",
+      "A performance audit against pre-set benchmarks"
     ],
     "correct": 1,
     "weight": 2
@@ -104,7 +104,7 @@ export const STAGE_QUIZ: Question[] = [
     "options": [
       "Review of the Terms of Reference",
       "Review of the Design Report version 1",
-      "Final budget approval",
+      "Approval of the consultancy contracts and budget",
       "The Recommendations Workshop"
     ],
     "correct": 2,
@@ -463,10 +463,10 @@ export const CHAPTER_QUIZZES: Record<string, Question[]> = {
       "source": "stage",
       "question": "In the UNFPA CPE methodology, recruitment of the evaluation team happens in TWO stages. Stage one is the recruitment of:",
       "options": [
-        "The team leader",
-        "The national consultant",
+        "The international team leader",
+        "All national thematic consultants",
         "The Young and Emerging Evaluator (YEE)",
-        "The reference group chair"
+        "The CO communication officer who will support dissemination"
       ],
       "correct": 2,
       "weight": 2
@@ -480,7 +480,7 @@ export const CHAPTER_QUIZZES: Record<string, Question[]> = {
       "options": [
         "Review of the Terms of Reference",
         "Review of the Design Report version 1",
-        "Final budget approval",
+        "Approval of the consultancy contracts and budget",
         "The Recommendations Workshop"
       ],
       "correct": 2,
@@ -617,10 +617,10 @@ export const CHAPTER_QUIZZES: Record<string, Question[]> = {
       "source": "stage",
       "question": "Why does UNFPA exclude 'impact' from the standard CPE criteria?",
       "options": [
-        "Impact is not important",
-        "It is too political to assess",
+        "It is already covered indirectly through the effectiveness criterion",
+        "The Strategic Plan evaluation assesses impact at corporate level instead",
         "Impact requires a different time frame and methodology beyond the CPE's scope",
-        "It overlaps with sustainability"
+        "It overlaps too much with the sustainability criterion to add value"
       ],
       "correct": 2,
       "weight": 2
@@ -632,10 +632,10 @@ export const CHAPTER_QUIZZES: Record<string, Question[]> = {
       "source": "stage",
       "question": "The UNFPA CPE methodology is best described as:",
       "options": [
-        "A randomised controlled trial",
+        "A quasi-experimental impact evaluation using difference-in-differences",
         "A theory-based contribution analysis",
-        "A pure attribution evaluation",
-        "An audit-based assessment"
+        "An attribution evaluation isolating UNFPA's causal effect",
+        "A performance audit against pre-set benchmarks"
       ],
       "correct": 1,
       "weight": 2

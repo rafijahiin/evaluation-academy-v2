@@ -1,16 +1,27 @@
 "use client";
 import { useState } from "react";
 import { m, AnimatePresence } from "motion/react";
-import { Clock, FileText, Target, Wrench } from "lucide-react";
+import {
+  Clock,
+  FileText,
+  Target,
+  Wrench,
+  Flag,
+  Footprints,
+  MapPin,
+} from "lucide-react";
 
 /**
  * The CPE Roadmap (handbook Figure 2) — interactive 11-month journey
- * showing the five phases as horizontal bars on a months timeline,
- * with their key deliverables, milestones, and tools surfaced on click.
+ * showing the five phases as horizontal bars on a months timeline.
  *
  * Designed for the landing page: gives prospective learners a tangible
  * sense of what a CPE looks like end-to-end before they start the
  * course. Also usable inline in lesson 1.1.
+ *
+ * Visual language: phase bars sit on a dashed travel "path" with a
+ * launch marker at M1 and a destination flag at M11, evoking a
+ * journey rather than a Gantt chart.
  */
 
 type Phase = {
@@ -170,11 +181,18 @@ const PHASES: Phase[] = [
   },
 ];
 
+const totalMonths = 11;
+
+// color-mix produces an accent with alpha; works with CSS vars (unlike
+// hex-alpha concatenation, which silently fails when the base is a var()).
+function withAlpha(color: string, pct: number) {
+  return `color-mix(in srgb, ${color} ${pct}%, transparent)`;
+}
+
 export function CPERoadmap() {
   const [active, setActive] = useState<string>("preparation");
   const activePhase = PHASES.find((p) => p.id === active)!;
-
-  const totalMonths = 11;
+  const activeIdx = PHASES.findIndex((p) => p.id === active);
 
   return (
     <section className="my-12">
@@ -194,9 +212,29 @@ export function CPERoadmap() {
       </div>
 
       {/* Timeline canvas */}
-      <div className="rounded-3xl bg-surface-2 border border-border p-5 sm:p-7">
+      <div
+        className="relative rounded-3xl bg-surface-2 border border-border p-5 sm:p-7 overflow-hidden"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 0% 0%, rgba(31,98,191,0.04), transparent 60%), radial-gradient(circle at 100% 100%, rgba(20,184,166,0.05), transparent 55%)",
+        }}
+      >
+        {/* Journey markers — Launch flag at M1, Destination flag at M11 */}
+        <div className="absolute left-4 sm:left-5 top-4 sm:top-5 z-10 flex items-center gap-1.5 px-2 py-1 rounded-full bg-white border border-border shadow-sm">
+          <Footprints className="w-3 h-3 text-un-700" />
+          <span className="text-[9.5px] uppercase tracking-[0.14em] font-bold text-un-700">
+            Launch
+          </span>
+        </div>
+        <div className="absolute right-4 sm:right-5 top-4 sm:top-5 z-10 flex items-center gap-1.5 px-2 py-1 rounded-full text-white shadow-sm" style={{ background: "var(--un-blue-900)" }}>
+          <Flag className="w-3 h-3" />
+          <span className="text-[9.5px] uppercase tracking-[0.14em] font-bold">
+            Report
+          </span>
+        </div>
+
         {/* Month axis */}
-        <div className="hidden sm:block relative h-6 mb-3">
+        <div className="hidden sm:block relative h-6 mt-7 mb-3">
           <div className="absolute inset-0 flex">
             {Array.from({ length: totalMonths }).map((_, i) => (
               <div
@@ -211,59 +249,140 @@ export function CPERoadmap() {
           </div>
         </div>
 
-        {/* Phase bars */}
-        <div className="space-y-2.5">
-          {PHASES.map((phase, idx) => {
-            const isActive = active === phase.id;
-            const leftPct = ((phase.startMonth - 1) / totalMonths) * 100;
-            const widthPct =
-              ((phase.endMonth - phase.startMonth + 1) / totalMonths) * 100;
+        {/* Phase bars + journey path overlay */}
+        <div className="relative">
+          {/* Travel path — a dashed road behind the bars */}
+          <svg
+            className="absolute inset-0 pointer-events-none"
+            preserveAspectRatio="none"
+            viewBox="0 0 100 100"
+            style={{ width: "100%", height: "100%" }}
+            aria-hidden
+          >
+            <path
+              d="M 0 12 Q 25 4, 50 26 T 100 50 Q 75 70, 50 75 T 0 92"
+              stroke="var(--un-blue-200)"
+              strokeWidth="0.4"
+              strokeDasharray="2 2"
+              fill="none"
+              opacity="0.7"
+            />
+          </svg>
 
-            return (
-              <m.button
-                key={phase.id}
-                type="button"
-                onClick={() => setActive(phase.id)}
-                onMouseEnter={() => setActive(phase.id)}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.06 * idx,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="relative w-full h-12 rounded-xl overflow-hidden block bg-white border border-border hover:border-un-200 transition-colors"
-              >
-                {/* Bar fill */}
-                <m.div
-                  className="absolute inset-y-0 rounded-xl flex items-center px-3 sm:px-4 gap-2 sm:gap-3 overflow-hidden"
-                  style={{
-                    left: `${leftPct}%`,
-                    width: `${widthPct}%`,
-                    background: `linear-gradient(90deg, ${phase.accent} 0%, ${phase.accent}DD 100%)`,
+          <div className="relative space-y-2.5">
+            {PHASES.map((phase, idx) => {
+              const isActive = active === phase.id;
+              const leftPct = ((phase.startMonth - 1) / totalMonths) * 100;
+              const widthPct =
+                ((phase.endMonth - phase.startMonth + 1) / totalMonths) * 100;
+              const isCurrent = idx === activeIdx;
+
+              return (
+                <m.button
+                  key={phase.id}
+                  type="button"
+                  onClick={() => setActive(phase.id)}
+                  onMouseEnter={() => setActive(phase.id)}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.45,
+                    delay: 0.07 * idx,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
-                  animate={{
-                    boxShadow: isActive
-                      ? `0 0 0 3px ${phase.accent}33, 0 4px 12px -4px ${phase.accent}55`
-                      : "0 0 0 0px transparent, 0 1px 2px rgba(15,23,42,0.04)",
-                  }}
-                  transition={{ duration: 0.25 }}
+                  className="relative w-full h-12 rounded-xl block bg-white border border-border hover:border-un-200 transition-colors"
                 >
-                  <span className="font-display italic text-white text-[14px] sm:text-[16px] leading-none shrink-0">
-                    0{phase.number}
+                  {/* Bar fill */}
+                  <m.div
+                    className="absolute inset-y-0 rounded-xl flex items-center px-3 sm:px-4 gap-2 sm:gap-3 overflow-hidden"
+                    style={{
+                      left: `${leftPct}%`,
+                      width: `${widthPct}%`,
+                      background: `linear-gradient(90deg, ${phase.accent} 0%, ${withAlpha(
+                        phase.accent,
+                        85,
+                      )} 100%)`,
+                    }}
+                    animate={{
+                      boxShadow: isActive
+                        ? `0 0 0 3px ${withAlpha(phase.accent, 22)}, 0 6px 18px -6px ${withAlpha(phase.accent, 55)}`
+                        : "0 0 0 0px transparent, 0 1px 2px rgba(15,23,42,0.06)",
+                    }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <m.span
+                      className="font-display italic text-white leading-none shrink-0"
+                      style={{
+                        textShadow: "0 1px 2px rgba(0,0,0,0.15)",
+                        fontSize: "clamp(14px, 1.6vw, 18px)",
+                        fontWeight: 600,
+                      }}
+                      animate={{ scale: isCurrent ? 1.1 : 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      0{phase.number}
+                    </m.span>
+                    <span className="text-white text-[11.5px] sm:text-[13px] font-semibold tracking-[-0.005em] truncate" style={{ textShadow: "0 1px 1px rgba(0,0,0,0.12)" }}>
+                      {phase.title}
+                    </span>
+                    <span className="ml-auto hidden sm:inline-flex items-center gap-1 text-white/85 text-[10.5px] font-numeric font-semibold tabular-nums shrink-0">
+                      <Clock className="w-3 h-3" />
+                      M{phase.startMonth}–{phase.endMonth}
+                    </span>
+                  </m.div>
+
+                  {/* Waypoint pin at start of each phase */}
+                  <span
+                    className="absolute -top-1.5 z-10 flex items-center justify-center"
+                    style={{
+                      left: `calc(${leftPct}% - 9px)`,
+                      width: 18,
+                      height: 18,
+                    }}
+                    aria-hidden
+                  >
+                    <m.span
+                      className="w-2.5 h-2.5 rounded-full border-2 border-white"
+                      style={{ background: phase.accent }}
+                      animate={{
+                        scale: isCurrent ? [1, 1.3, 1] : 1,
+                      }}
+                      transition={{
+                        duration: 1.4,
+                        repeat: isCurrent ? Infinity : 0,
+                        ease: "easeInOut",
+                      }}
+                    />
                   </span>
-                  <span className="text-white text-[11.5px] sm:text-[13px] font-semibold tracking-[-0.005em] truncate">
-                    {phase.title}
-                  </span>
-                  <span className="ml-auto hidden sm:inline-flex items-center gap-1 text-white/85 text-[10.5px] font-numeric font-semibold tabular-nums shrink-0">
-                    <Clock className="w-3 h-3" />
-                    M{phase.startMonth}–{phase.endMonth}
-                  </span>
-                </m.div>
-              </m.button>
-            );
-          })}
+                </m.button>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Active-phase traveler marker — moves along the timeline */}
+        <m.div
+          className="relative mt-3 h-4 hidden sm:block"
+          aria-hidden
+          initial={false}
+        >
+          <m.div
+            className="absolute top-0 -translate-x-1/2 flex flex-col items-center gap-0.5"
+            animate={{
+              left: `${
+                ((activePhase.startMonth - 0.5) / totalMonths) * 100
+              }%`,
+            }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <MapPin
+              className="w-4 h-4"
+              style={{ color: activePhase.accent }}
+              fill="white"
+              strokeWidth={2.4}
+            />
+          </m.div>
+        </m.div>
       </div>
 
       {/* Detail panel */}
@@ -280,7 +399,7 @@ export function CPERoadmap() {
           {/* Detail header */}
           <div
             className="px-5 sm:px-7 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-            style={{ background: `${activePhase.accent}0F` }}
+            style={{ background: withAlpha(activePhase.accent, 7) }}
           >
             <div>
               <div
@@ -348,7 +467,7 @@ function DetailColumn({
         <span
           aria-hidden
           className="inline-flex items-center justify-center w-7 h-7 rounded-lg"
-          style={{ background: `${accent}1A`, color: accent }}
+          style={{ background: withAlpha(accent, 10), color: accent }}
         >
           <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
         </span>

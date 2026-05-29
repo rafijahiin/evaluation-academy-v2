@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { m } from "motion/react";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { MorphingBackground } from "./MorphingBackground";
+import { CycleWord } from "./CycleWord";
 import { COURSE_META } from "@/content/chapters";
 
 /**
@@ -24,7 +25,19 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-un-100 text-un-700 text-[12px] font-medium tracking-wide"
         >
-          <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--un-blue)" }} />
+          {/* pulsing live dot */}
+          <span className="relative inline-flex w-1.5 h-1.5">
+            <m.span
+              className="absolute inset-0 rounded-full"
+              style={{ background: "var(--un-blue)" }}
+              animate={{ scale: [1, 2.6, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+            />
+            <span
+              className="relative w-1.5 h-1.5 rounded-full"
+              style={{ background: "var(--un-blue)" }}
+            />
+          </span>
           An immersive course · Based on UNFPA Handbook 2024
         </m.div>
 
@@ -37,18 +50,41 @@ export function Hero() {
           style={{ fontWeight: 500 }}
         >
           Learn the craft of{" "}
-          <span
+          <CycleWord
+            words={["evaluation", "inquiry", "contribution", "evidence", "change"]}
             className="italic"
             style={{
               color: "var(--un-blue-800)",
               fontWeight: 600,
               textShadow: "0 1px 0 rgba(255,255,255,0.4)",
             }}
-          >
-            evaluation
-          </span>
+          />
           <span className="text-ink-2"> — chapter by chapter.</span>
         </m.h1>
+
+        {/* floating sparkle accent (decorative) */}
+        <m.div
+          aria-hidden
+          className="absolute right-6 sm:right-10 top-20 sm:top-28 pointer-events-none hidden md:block"
+          animate={{ y: [0, -12, 0], rotate: [0, 8, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Sparkles
+            className="w-7 h-7"
+            style={{ color: "var(--teal)", opacity: 0.55 }}
+          />
+        </m.div>
+        <m.div
+          aria-hidden
+          className="absolute right-24 sm:right-32 top-44 sm:top-56 pointer-events-none hidden md:block"
+          animate={{ y: [0, 10, 0], rotate: [0, -10, 0] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+        >
+          <Sparkles
+            className="w-5 h-5"
+            style={{ color: "var(--amber)", opacity: 0.5 }}
+          />
+        </m.div>
 
         {/* subhead */}
         <m.p

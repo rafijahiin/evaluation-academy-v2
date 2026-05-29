@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, m } from "motion/react";
 import { ArrowLeft, ArrowRight, Send } from "lucide-react";
 import { MCQCard } from "./MCQCard";
@@ -8,6 +8,7 @@ import { ArrangeCard } from "./ArrangeCard";
 import { QuizResults } from "./QuizResults";
 import { cn } from "@/lib/utils";
 import type { Question } from "@/content/quizzes";
+import { shuffleQuiz } from "@/lib/shuffle";
 
 type AnswerRecord = {
   question: Question;
@@ -30,7 +31,7 @@ type Props = {
 export function QuizEngine({
   title,
   subtitle,
-  questions,
+  questions: incomingQuestions,
   passThreshold,
   mode,
   chapter,
@@ -40,7 +41,18 @@ export function QuizEngine({
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number | number[] | null>>({});
   const [submitted, setSubmitted] = useState(false);
-  const [version, setVersion] = useState(0); // forces remount on retake
+  const [version, setVersion] = useState(0); // forces remount + reshuffle on retake
+
+  // Shuffle question order AND option order on mount and on every retake.
+  // Done in an effect (post-hydration) so SSR markup matches the initial
+  // unshuffled render — then the client swaps to a shuffled set on mount,
+  // and the user only ever sees the shuffled state.
+  const [questions, setQuestions] = useState<Question[]>(incomingQuestions);
+  useEffect(() => {
+    setQuestions(shuffleQuiz(incomingQuestions));
+    // version is the retake counter; we re-shuffle when it bumps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [version, incomingQuestions]);
 
   const total = questions.length;
   const current = questions[index];

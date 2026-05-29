@@ -144,20 +144,22 @@ export function WorldMap() {
           const [x, y] = projected;
           return (
             <g key={country.name}>
+              {/* Pulsing halo: animate r + opacity as SVG attributes (not CSS
+                  transform) so the pulse stays anchored to (cx, cy) regardless
+                  of viewport size. Animating scale on an SVG circle drifts
+                  because transform-origin doesn't map to SVG user units. */}
               <m.circle
                 cx={x}
                 cy={y}
-                r={3}
                 fill="var(--teal)"
-                initial={{ opacity: 0.55, scale: 1 }}
-                animate={{ opacity: [0.5, 0, 0.5], scale: [1, 2.8, 1] }}
+                initial={{ r: 3, opacity: 0.5 }}
+                animate={{ r: [3, 8.5, 3], opacity: [0.5, 0, 0.5] }}
                 transition={{
                   duration: 2.6,
                   repeat: Infinity,
                   delay: (idx % 8) * 0.32,
                   ease: "easeOut",
                 }}
-                style={{ originX: `${x}px`, originY: `${y}px` }}
               />
               <circle
                 cx={x}
