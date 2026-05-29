@@ -1,5 +1,6 @@
 import { Hero } from "@/components/hero/Hero";
 import { TheJourney } from "@/components/landing/TheJourney";
+import { RoadmapSection } from "@/components/landing/RoadmapSection";
 import { GlobalMandate } from "@/components/landing/GlobalMandate";
 import { Footer } from "@/components/chrome/Footer";
 
@@ -8,6 +9,7 @@ export default function HomePage() {
     <>
       <Hero />
       <TheJourney />
+      <RoadmapSection />
       <GlobalMandate />
       <Footer />
     </>
