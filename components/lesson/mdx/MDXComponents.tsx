@@ -11,6 +11,11 @@ import { CPERoadmap } from "../../diagrams/CPERoadmap";
 import { ToRDraftingFlow } from "../../diagrams/ToRDraftingFlow";
 import { TeamRecruitmentFlow } from "../../diagrams/TeamRecruitmentFlow";
 import { ManagementResponseFlow } from "../../diagrams/ManagementResponseFlow";
+import { StakeholderQuadrant } from "../../diagrams/StakeholderQuadrant";
+import { ContributionChain } from "../../diagrams/ContributionChain";
+import { MethodsMix } from "../../diagrams/MethodsMix";
+import { FindingsPyramid } from "../../diagrams/FindingsPyramid";
+import { StrategicCommElements } from "../../diagrams/StrategicCommElements";
 
 /**
  * Components exposed inside .mdx lessons. Imported via MDXProvider in
@@ -34,6 +39,11 @@ export const mdxComponents = {
   ToRDraftingFlow,
   TeamRecruitmentFlow,
   ManagementResponseFlow,
+  StakeholderQuadrant,
+  ContributionChain,
+  MethodsMix,
+  FindingsPyramid,
+  StrategicCommElements,
   // typography overrides — give MDX-rendered prose the same look as v1
   h1: (props: React.ComponentProps<"h1">) => (
     <h1
