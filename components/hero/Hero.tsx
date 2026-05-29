@@ -3,7 +3,6 @@ import Link from "next/link";
 import { m } from "motion/react";
 import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { MorphingBackground } from "./MorphingBackground";
-import { CycleWord } from "./CycleWord";
 import { COURSE_META } from "@/content/chapters";
 
 /**
@@ -50,15 +49,16 @@ export function Hero() {
           style={{ fontWeight: 500 }}
         >
           Learn the craft of{" "}
-          <CycleWord
-            words={["evaluation", "inquiry", "contribution", "evidence", "change"]}
+          <span
             className="italic"
             style={{
               color: "var(--un-blue-800)",
               fontWeight: 600,
               textShadow: "0 1px 0 rgba(255,255,255,0.4)",
             }}
-          />
+          >
+            evaluation
+          </span>
           <span className="text-ink-2"> — chapter by chapter.</span>
         </m.h1>
 
