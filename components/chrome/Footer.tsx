@@ -58,6 +58,9 @@ export function Footer() {
             title="Tools"
             links={[
               { label: "ToC Builder", href: "/toc-builder" },
+              { label: "Matrix Builder", href: "/matrix-builder" },
+              { label: "Run a CPE (simulation)", href: "/scenario" },
+              { label: "Flashcards", href: "/review" },
               { label: "Final exam", href: "/exam" },
               { label: "Certificate", href: "/certificate" },
             ]}

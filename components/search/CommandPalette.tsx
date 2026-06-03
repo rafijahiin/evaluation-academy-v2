@@ -65,6 +65,24 @@ function buildItems(): Item[] {
     haystack: "theory of change toc builder logic model results chain tool",
   });
   items.push({
+    id: "matrix",
+    title: "Evaluation Matrix builder",
+    subtitle: "Interactive tool",
+    href: "/matrix-builder",
+    kind: "tool",
+    haystack:
+      "evaluation matrix builder questions criteria assumptions indicators sources methods table tool",
+  });
+  items.push({
+    id: "scenario",
+    title: "Run a CPE (simulation)",
+    subtitle: "Decision game",
+    href: "/scenario",
+    kind: "tool",
+    haystack:
+      "run a cpe simulation scenario decision game practice exemplaria choices",
+  });
+  items.push({
     id: "review",
     title: "Flashcards & review",
     subtitle: "Spaced repetition",

@@ -1,6 +1,17 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Check, Play, Flame, Trophy, Layers, Lock } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Play,
+  Flame,
+  Trophy,
+  Layers,
+  Lock,
+  GitBranch,
+  Table2,
+  Gamepad2,
+} from "lucide-react";
 import {
   useProgress,
   useXp,
@@ -279,7 +290,84 @@ export function DashboardClient({
           );
         })}
       </StaggerChildren>
+
+      {/* Practice & tools */}
+      <Reveal>
+        <div className="mt-14">
+          <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] font-semibold text-ink-3 mb-4">
+            <span className="w-6 h-px bg-ink-4" />
+            Practice &amp; tools
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <ToolCard
+              href="/scenario"
+              icon={Gamepad2}
+              title="Run a CPE"
+              blurb="A decision game — manage an evaluation end to end."
+              accent="var(--un-blue)"
+            />
+            <ToolCard
+              href="/matrix-builder"
+              icon={Table2}
+              title="Matrix Builder"
+              blurb="Build the evaluation matrix; print or export to CSV."
+              accent="var(--teal)"
+            />
+            <ToolCard
+              href="/toc-builder"
+              icon={GitBranch}
+              title="ToC Builder"
+              blurb="Map a Theory of Change from inputs to result."
+              accent="var(--un-blue-900)"
+            />
+            <ToolCard
+              href="/review"
+              icon={Layers}
+              title="Flashcards"
+              blurb="Spaced-repetition review of every key term."
+              accent="var(--amber)"
+            />
+          </div>
+        </div>
+      </Reveal>
     </div>
+  );
+}
+
+function ToolCard({
+  href,
+  icon: Icon,
+  title,
+  blurb,
+  accent,
+}: {
+  href: string;
+  icon: typeof Layers;
+  title: string;
+  blurb: string;
+  accent: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group block h-full rounded-2xl border border-border bg-white p-5 hover:border-un-200 hover:-translate-y-1 hover:shadow-bloom transition-all"
+    >
+      <span
+        className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3"
+        style={{
+          background: `color-mix(in srgb, ${accent} 12%, transparent)`,
+          color: accent,
+        }}
+      >
+        <Icon className="w-5 h-5" strokeWidth={2.2} />
+      </span>
+      <h3 className="text-[15.5px] font-semibold text-ink-1">{title}</h3>
+      <p className="mt-1 text-[13px] text-ink-2 leading-[1.5]">{blurb}</p>
+      <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium text-un-700">
+        Open
+        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+      </span>
+    </Link>
   );
 }
 
