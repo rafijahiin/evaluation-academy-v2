@@ -34,7 +34,7 @@ export function NameModal({
         exit={{ opacity: 0 }}
         className="absolute inset-0"
         style={{
-          background: "rgba(10, 37, 64, 0.55)",
+          background: "rgba(19, 22, 25, 0.55)",
           backdropFilter: "blur(8px)",
         }}
         onClick={onCancel}

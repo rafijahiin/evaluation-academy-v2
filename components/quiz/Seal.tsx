@@ -40,7 +40,7 @@ export function Seal({
       >
         <defs>
           <radialGradient id="seal-grad" cx="0.5" cy="0.45">
-            <stop offset="0%" stopColor="#F59E0B" />
+            <stop offset="0%" stopColor="#F96000" />
             <stop offset="55%" stopColor="#D97706" />
             <stop offset="100%" stopColor="#92400E" />
           </radialGradient>

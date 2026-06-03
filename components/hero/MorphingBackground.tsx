@@ -117,8 +117,8 @@ export function MorphingBackground() {
         style={{
           background: `
             radial-gradient(ellipse 55% 45% at 9% 3%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0) 70%),
-            radial-gradient(ellipse 70% 60% at 9% 3%, rgba(31,98,191,0.32) 0%, rgba(31,98,191,0.10) 45%, rgba(31,98,191,0) 75%),
-            radial-gradient(ellipse 50% 50% at 92% 85%, rgba(20,184,166,0.10) 0%, rgba(20,184,166,0) 70%),
+            radial-gradient(ellipse 70% 60% at 9% 3%, rgba(249,96,0,0.32) 0%, rgba(249,96,0,0.10) 45%, rgba(249,96,0,0) 75%),
+            radial-gradient(ellipse 50% 50% at 92% 85%, rgba(33,113,236,0.10) 0%, rgba(33,113,236,0) 70%),
             linear-gradient(165deg, #F4F8FD 0%, #E7EFF8 50%, #DCE7F4 100%)
           `,
         }}
@@ -133,7 +133,7 @@ export function MorphingBackground() {
           width: "44%",
           aspectRatio: "1",
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(159,201,232,0.55) 25%, rgba(31,98,191,0.18) 55%, rgba(31,98,191,0) 80%)",
+            "radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(253,207,179,0.55) 25%, rgba(249,96,0,0.18) 55%, rgba(249,96,0,0) 80%)",
           filter: "blur(4px)",
         }}
         animate={
@@ -153,9 +153,9 @@ export function MorphingBackground() {
         <defs>
           <linearGradient id="ray-grad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
-            <stop offset="15%" stopColor="rgba(159,201,232,0.85)" />
-            <stop offset="50%" stopColor="rgba(31,98,191,0.45)" />
-            <stop offset="100%" stopColor="rgba(31,98,191,0)" />
+            <stop offset="15%" stopColor="rgba(253,207,179,0.85)" />
+            <stop offset="50%" stopColor="rgba(249,96,0,0.45)" />
+            <stop offset="100%" stopColor="rgba(249,96,0,0)" />
           </linearGradient>
         </defs>
 
@@ -181,7 +181,7 @@ export function MorphingBackground() {
               width: mote.size,
               height: mote.size,
               background:
-                "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(31,98,191,0.55) 35%, rgba(31,98,191,0.18) 65%, rgba(31,98,191,0) 100%)",
+                "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(249,96,0,0.55) 35%, rgba(249,96,0,0.18) 65%, rgba(249,96,0,0) 100%)",
               opacity: 0,
               filter: "blur(0.5px)",
             }}

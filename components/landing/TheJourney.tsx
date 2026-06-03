@@ -39,52 +39,64 @@ type Palette = {
   sheen: string;
 };
 
-function paletteFor(accent: string): Palette {
-  switch (accent) {
-    case "un-blue":
+// UNFPA palette: orange dominates (three phases), with UNFPA Black and a
+// single UNFPA Blue accent for variety. Keyed by chapter slug so each of
+// the five phases is visually distinct.
+function paletteFor(slug: string): Palette {
+  switch (slug) {
+    case "preparation": // UNFPA Orange
       return {
-        bg: "linear-gradient(135deg, #006FB7 0%, #004576 100%)",
-        numeral: "rgba(255,255,255,0.12)",
+        bg: "linear-gradient(135deg, #F96000 0%, #D55200 100%)",
+        numeral: "rgba(255,255,255,0.14)",
         text: "#FFFFFF",
-        eyebrow: "rgba(207, 229, 244, 0.95)",
-        accent: "#9FC9E8",
-        sheen: "rgba(255,255,255,0.18)",
+        eyebrow: "rgba(253, 207, 179, 0.95)",
+        accent: "#FDCFB3",
+        sheen: "rgba(255,255,255,0.20)",
       };
-    case "navy":
+    case "design": // UNFPA Black
       return {
-        bg: "linear-gradient(135deg, #0A2540 0%, #061c33 100%)",
+        bg: "linear-gradient(135deg, #131619 0%, #2A2D31 100%)",
         numeral: "rgba(255,255,255,0.10)",
         text: "#FFFFFF",
-        eyebrow: "rgba(159, 201, 232, 0.95)",
-        accent: "#9FC9E8",
-        sheen: "rgba(255,255,255,0.15)",
+        eyebrow: "rgba(217, 219, 225, 0.95)",
+        accent: "#D9DBE1",
+        sheen: "rgba(255,255,255,0.14)",
       };
-    case "teal":
+    case "fieldwork": // UNFPA Blue (the single accent)
       return {
-        bg: "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
+        bg: "linear-gradient(135deg, #2171EC 0%, #184EA5 100%)",
         numeral: "rgba(255,255,255,0.16)",
         text: "#FFFFFF",
-        eyebrow: "rgba(204, 251, 241, 0.95)",
-        accent: "#CCFBF1",
-        sheen: "rgba(255,255,255,0.2)",
+        eyebrow: "rgba(189, 212, 249, 0.95)",
+        accent: "#BDD4F9",
+        sheen: "rgba(255,255,255,0.20)",
       };
-    case "amber":
+    case "reporting": // Dark Orange
       return {
-        bg: "linear-gradient(135deg, #F59E0B 0%, #B45309 100%)",
+        bg: "linear-gradient(135deg, #AE4300 0%, #7A2F00 100%)",
+        numeral: "rgba(255,255,255,0.16)",
+        text: "#FFFFFF",
+        eyebrow: "rgba(253, 207, 179, 0.95)",
+        accent: "#FDCFB3",
+        sheen: "rgba(255,255,255,0.18)",
+      };
+    case "dissemination": // Pastel Orange
+      return {
+        bg: "linear-gradient(135deg, #FB904D 0%, #F96000 100%)",
         numeral: "rgba(255,255,255,0.18)",
         text: "#FFFFFF",
-        eyebrow: "rgba(254, 243, 199, 0.95)",
-        accent: "#FEF3C7",
-        sheen: "rgba(255,255,255,0.22)",
+        eyebrow: "rgba(255, 244, 236, 0.95)",
+        accent: "#FFF4EC",
+        sheen: "rgba(255,255,255,0.24)",
       };
     default:
       return {
-        bg: "linear-gradient(135deg, #006FB7 0%, #004576 100%)",
-        numeral: "rgba(255,255,255,0.12)",
+        bg: "linear-gradient(135deg, #F96000 0%, #D55200 100%)",
+        numeral: "rgba(255,255,255,0.14)",
         text: "#FFFFFF",
-        eyebrow: "rgba(207, 229, 244, 0.95)",
-        accent: "#9FC9E8",
-        sheen: "rgba(255,255,255,0.18)",
+        eyebrow: "rgba(253, 207, 179, 0.95)",
+        accent: "#FDCFB3",
+        sheen: "rgba(255,255,255,0.20)",
       };
   }
 }
@@ -134,7 +146,7 @@ export function TheJourney() {
           delayStep={0.08}
         >
           {CHAPTERS.map((chapter) => {
-            const p = paletteFor(chapter.accent);
+            const p = paletteFor(chapter.slug);
             return (
               <StaggerItem key={chapter.slug}>
                 <JourneyCard

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Atkinson_Hyperlegible_Next } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/chrome/Navbar";
 import { Footer } from "@/components/chrome/Footer";
@@ -8,23 +8,14 @@ import { Breadcrumb } from "@/components/chrome/Breadcrumb";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { CommandPalette } from "@/components/search/CommandPalette";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// UNFPA brand typeface — Atkinson Hyperlegible (Next), used for ALL text
+// per the brand guidelines (no serif/display swaps). Designed by the
+// Braille Institute for maximum legibility.
+const atkinson = Atkinson_Hyperlegible_Next({
+  variable: "--font-atk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
 });
 
 export const metadata: Metadata = {
@@ -42,14 +33,16 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  // UNFPA Orange — tints the mobile browser chrome.
+  themeColor: "#F96000",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable}`}
-    >
+    <html lang="en" className={atkinson.variable}>
       <body className="min-h-screen flex flex-col">
         <MotionProvider>
           <FloatingProgressBar />

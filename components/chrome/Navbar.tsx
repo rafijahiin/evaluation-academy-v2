@@ -39,7 +39,7 @@ export function Navbar() {
               style={{
                 background:
                   "linear-gradient(135deg, var(--un-blue) 0%, var(--un-blue-700) 100%)",
-                boxShadow: "0 4px 10px rgba(0,111,183,0.28)",
+                boxShadow: "0 4px 10px rgba(249,96,0,0.28)",
               }}
             >
               <Compass className="w-5 h-5 text-white" strokeWidth={2.2} />
@@ -84,7 +84,7 @@ export function Navbar() {
                 {streak > 0 && (
                   <div
                     className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium"
-                    style={{ background: "var(--amber-soft, #FEF3C7)", color: "#B45309" }}
+                    style={{ background: "var(--amber-soft, #FDCFB3)", color: "#AE4300" }}
                     title={`${streak}-day study streak`}
                   >
                     <Flame className="w-3.5 h-3.5" />

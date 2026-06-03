@@ -161,7 +161,7 @@ export function TocWizard({
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-white text-[13.5px] font-medium hover:shadow-bloom hover:-translate-y-0.5 transition-all"
           style={{
             background: isLast
-              ? "linear-gradient(135deg, var(--amber) 0%, #B45309 100%)"
+              ? "linear-gradient(135deg, var(--amber) 0%, #AE4300 100%)"
               : "linear-gradient(135deg, var(--un-blue) 0%, var(--un-blue-700) 100%)",
           }}
         >
@@ -266,7 +266,7 @@ function LevelForm({
           style={
             {
               borderColor: "var(--border)",
-              ["--tw-ring-color" as never]: "rgba(0, 111, 183, 0.12)",
+              ["--tw-ring-color" as never]: "rgba(249, 96, 0, 0.12)",
             } as React.CSSProperties
           }
           onFocus={(e) => {
@@ -284,8 +284,8 @@ function LevelForm({
       <div
         className="rounded-2xl border px-4 py-4"
         style={{
-          background: "rgba(0, 111, 183, 0.04)",
-          borderColor: "rgba(0, 111, 183, 0.18)",
+          background: "rgba(249, 96, 0, 0.04)",
+          borderColor: "rgba(249, 96, 0, 0.18)",
           borderStyle: "solid",
         }}
       >
@@ -294,7 +294,7 @@ function LevelForm({
             aria-hidden
             className="inline-flex items-center justify-center w-6 h-6 rounded-full"
             style={{
-              background: "rgba(0, 111, 183, 0.12)",
+              background: "rgba(249, 96, 0, 0.12)",
               color: "var(--un-blue-700)",
             }}
           >
@@ -337,7 +337,7 @@ function LevelForm({
               className="inline-flex items-center justify-center w-7 h-7 rounded-full text-white"
               style={{
                 background:
-                  "linear-gradient(135deg, var(--amber) 0%, #B45309 100%)",
+                  "linear-gradient(135deg, var(--amber) 0%, #AE4300 100%)",
               }}
             >
               <ShieldCheck className="w-3.5 h-3.5" strokeWidth={2.4} />

@@ -265,7 +265,7 @@ export function QuizEngine({
               allAnswered
                 ? {
                     background:
-                      "linear-gradient(135deg, var(--amber) 0%, #B45309 100%)",
+                      "linear-gradient(135deg, var(--amber) 0%, #AE4300 100%)",
                   }
                 : undefined
             }

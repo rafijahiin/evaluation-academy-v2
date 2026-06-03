@@ -151,11 +151,11 @@ export function accentInk(accent: "un-blue" | "teal" | "navy" | "amber"): string
 export function accentBg(accent: "un-blue" | "teal" | "navy" | "amber"): string {
   switch (accent) {
     case "un-blue":
-      return "rgba(0, 111, 183, 0.08)";
+      return "rgba(249, 96, 0, 0.08)";
     case "teal":
-      return "rgba(20, 184, 166, 0.10)";
+      return "rgba(33, 113, 236, 0.10)";
     case "navy":
-      return "rgba(10, 37, 64, 0.08)";
+      return "rgba(19, 22, 25, 0.08)";
     case "amber":
       return "rgba(245, 158, 11, 0.10)";
   }

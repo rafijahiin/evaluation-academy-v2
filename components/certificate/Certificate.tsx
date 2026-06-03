@@ -51,8 +51,8 @@ export const Certificate = forwardRef<HTMLDivElement, Props>(function Certificat
         aria-hidden
         className="absolute inset-4 sm:inset-6 rounded-2xl pointer-events-none"
         style={{
-          border: "1px solid rgba(0, 111, 183, 0.18)",
-          boxShadow: "inset 0 0 0 4px rgba(0, 111, 183, 0.04)",
+          border: "1px solid rgba(249, 96, 0, 0.18)",
+          boxShadow: "inset 0 0 0 4px rgba(249, 96, 0, 0.04)",
         }}
       />
 

@@ -216,7 +216,7 @@ export function CPERoadmap() {
         className="relative rounded-3xl bg-surface-2 border border-border p-5 sm:p-7 overflow-hidden"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 0% 0%, rgba(31,98,191,0.04), transparent 60%), radial-gradient(circle at 100% 100%, rgba(20,184,166,0.05), transparent 55%)",
+            "radial-gradient(circle at 0% 0%, rgba(249,96,0,0.04), transparent 60%), radial-gradient(circle at 100% 100%, rgba(33,113,236,0.05), transparent 55%)",
         }}
       >
         {/* Journey markers — Launch flag at M1, Destination flag at M11 */}

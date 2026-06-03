@@ -30,19 +30,19 @@ const STAGES: { id: Stage; label: string; color: string; text: string }[] = [
   {
     id: "finding",
     label: "Finding",
-    color: "#14B8A6",
+    color: "#2171EC",
     text: "UNFPA's policy and standards-development support has substantially strengthened the pre-service midwifery curriculum, but supportive supervision and retention systems remain weak — limiting the curriculum's effect on service quality.",
   },
   {
     id: "conclusion",
     label: "Conclusion",
-    color: "#006FB7",
+    color: "#F96000",
     text: "The country programme's contribution to midwifery workforce development is most effective at the policy-and-training end of the chain, and weakest at the in-service and retention end — a strategic gap that constrains UNFPA's contribution to outcome-level changes in maternal health.",
   },
   {
     id: "recommendation",
     label: "Recommendation",
-    color: "#F59E0B",
+    color: "#F96000",
     text: "Reorient programme resources in the next cycle to in-service mentorship and retention incentives — building on the pre-service investments already made. Co-implement with Ministry of Health regional offices and Midwives' Association.",
   },
 ];

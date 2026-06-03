@@ -2,54 +2,62 @@
 
 /* ===========================
    Evaluation Academy — Design Tokens
-   UN-blue editorial, glassmorphism accents
+   OFFICIAL UNFPA BRAND (brandkit):
+     Primary: UNFPA Orange #F96000, Black #131619, Off-white #EFF1F7, White.
+     Single accent: UNFPA Blue #2171EC. Orange tints add depth.
+   Token names are kept as --un-blue* / --teal / --amber for cascade
+   reasons, but the VALUES are the UNFPA palette:
+     --un-blue*  = UNFPA Orange ramp (primary)
+     --un-blue-900 = UNFPA Black
+     --teal      = UNFPA Blue (the one permitted accent)
+     --amber     = Dark Orange (orange-family highlight)
    =========================== */
 
 :root {
-  /* ----- Color: Brand ----- */
-  --un-blue:        #006FB7;   /* primary UN-blue */
-  --un-blue-deep:   #0A2540;   /* navy */
-  --un-blue-50:     #EBF5FB;
-  --un-blue-100:    #CFE5F4;
-  --un-blue-200:    #9FC9E8;
-  --un-blue-300:    #5CA5D4;
-  --un-blue-400:    #2E89C7;
-  --un-blue-500:    #006FB7;
-  --un-blue-600:    #005A99;
-  --un-blue-700:    #004576;
-  --un-blue-800:    #002F52;
-  --un-blue-900:    #0A2540;
+  /* ----- Color: Brand — UNFPA Orange ramp (primary) ----- */
+  --un-blue:        #F96000;   /* UNFPA Orange */
+  --un-blue-deep:   #131619;   /* UNFPA Black */
+  --un-blue-50:     #FFF4EC;
+  --un-blue-100:    #FDE4D2;
+  --un-blue-200:    #FDCFB3;   /* Light Orange */
+  --un-blue-300:    #FBB184;
+  --un-blue-400:    #FB904D;   /* Pastel Orange */
+  --un-blue-500:    #FA7322;
+  --un-blue-600:    #F96000;   /* UNFPA Orange */
+  --un-blue-700:    #D55200;
+  --un-blue-800:    #AE4300;   /* Dark Orange */
+  --un-blue-900:    #131619;   /* UNFPA Black */
 
-  --amber:          #F59E0B;   /* CTA + completion */
-  --amber-soft:     #FEF3C7;
-  --teal:           #14B8A6;   /* in-progress + secondary */
-  --teal-soft:      #CCFBF1;
+  --amber:          #AE4300;   /* Dark Orange — warm highlight */
+  --amber-soft:     #FDCFB3;   /* Light Orange */
+  --teal:           #2171EC;   /* UNFPA Blue — the single accent */
+  --teal-soft:      #BDD4F9;   /* Light Blue */
 
-  /* ----- Color: Neutral ----- */
-  --surface-0:      #FBFBFD;   /* page background */
-  --surface-1:      #FFFFFF;   /* cards */
-  --surface-2:      #F4F6FA;   /* sunken sections */
-  --ink-1:          #0F172A;   /* primary text */
-  --ink-2:          #334155;   /* secondary text */
-  --ink-3:          #64748B;   /* muted */
-  --ink-4:          #94A3B8;   /* very muted */
-  --border:         #E2E8F0;
-  --border-strong:  #CBD5E1;
+  /* ----- Color: Neutral (UNFPA neutrals) ----- */
+  --surface-0:      #EFF1F7;   /* UNFPA Off-white — page background */
+  --surface-1:      #FFFFFF;   /* white cards */
+  --surface-2:      #E4E7F0;   /* sunken sections */
+  --ink-1:          #131619;   /* UNFPA Black — primary text */
+  --ink-2:          #3C3F43;   /* secondary text */
+  --ink-3:          #686A6C;   /* Ash — muted */
+  --ink-4:          #9A9DA2;   /* very muted */
+  --border:         #D9DBE1;   /* Silver */
+  --border-strong:  #C2C5CD;
 
   /* ----- Color: Glass ----- */
-  --glass-light:    rgba(255, 255, 255, 0.6);
+  --glass-light:    rgba(255, 255, 255, 0.62);
   --glass-medium:   rgba(255, 255, 255, 0.45);
-  --glass-dark:     rgba(10, 37, 64, 0.55);
+  --glass-dark:     rgba(19, 22, 25, 0.55);
 
   /* ----- Color: Status ----- */
   --success:        #10B981;
   --warning:        #F59E0B;
   --error:          #EF4444;
 
-  /* ----- Type ----- */
-  --font-display:   var(--font-fraunces);
-  --font-sans:      var(--font-geist-sans);
-  --font-mono:      var(--font-geist-mono);
+  /* ----- Type (UNFPA: Atkinson Hyperlegible for all text) ----- */
+  --font-display:   var(--font-atk);
+  --font-sans:      var(--font-atk);
+  --font-mono:      var(--font-atk);
 
   /* ----- Spacing scale (4pt baseline) ----- */
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
@@ -65,8 +73,8 @@
   --shadow-md:  0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
   --shadow-lg:  0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
   --shadow-xl:  0 20px 25px -5px rgba(15, 23, 42, 0.10), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
-  --shadow-glow: 0 0 0 4px rgba(0, 111, 183, 0.12), 0 8px 24px rgba(0, 111, 183, 0.18);
-  --shadow-bloom: 0 24px 48px -16px rgba(0, 111, 183, 0.25);
+  --shadow-glow: 0 0 0 4px rgba(249, 96, 0, 0.14), 0 8px 24px rgba(249, 96, 0, 0.20);
+  --shadow-bloom: 0 24px 48px -16px rgba(249, 96, 0, 0.22);
 
   /* ----- Motion ----- */
   --ease-out:       cubic-bezier(0.22, 1, 0.36, 1);
@@ -119,9 +127,9 @@
   --color-warning: var(--warning);
   --color-error: var(--error);
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-atk);
+  --font-sans: var(--font-atk);
+  --font-mono: var(--font-atk);
 
   --radius-xs: var(--r-xs);
   --radius-sm: var(--r-sm);
@@ -154,17 +162,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display headings */
+/* Display headings — UNFPA uses Atkinson everywhere (no serif).
+   Brand tracking: headlines set tight (~-2%). */
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
-/* Numeric display (for chapter numerals, stats) */
+/* Numeric display (chapter numerals, stats) — same typeface, tabular figures */
 .font-numeric {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 /* ===========================

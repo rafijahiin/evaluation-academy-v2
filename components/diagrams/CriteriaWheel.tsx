@@ -56,7 +56,7 @@ const PRIMARY: Criterion[] = [
     id: "efficiency",
     label: "Efficiency",
     short: "Good use of resources",
-    color: "#0E7C7B",
+    color: "#184EA5",
     tagline: "Could the same results have come more economically?",
     definition:
       "The extent to which the intervention delivers, or is likely to deliver, results in an economic and timely way. Could the same results have been achieved with fewer financial or technical resources?",
@@ -86,7 +86,7 @@ const HUMANITARIAN: Criterion[] = [
     id: "connectedness",
     label: "Connectedness",
     short: "Linked short to long",
-    color: "#B45309",
+    color: "#AE4300",
     tagline: "Do emergency activities consider longer-term context?",
     definition:
       "The extent to which short-term emergency activities are carried out in a context that takes longer-term and interconnected problems into account — a nexus approach — and indicates the complementarity of UNFPA with other partner interventions.",
@@ -305,7 +305,7 @@ export function CriteriaWheel() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[12.5px] font-medium border transition-colors"
           style={{
             background: showHumanitarian
-              ? "linear-gradient(135deg, var(--amber) 0%, #B45309 100%)"
+              ? "linear-gradient(135deg, var(--amber) 0%, #AE4300 100%)"
               : "white",
             color: showHumanitarian ? "white" : "var(--ink-2)",
             borderColor: showHumanitarian ? "transparent" : "var(--border)",

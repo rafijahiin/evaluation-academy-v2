@@ -41,13 +41,13 @@ const SOURCES: Node[] = [
 const PATHS: { id: string; color: string; nodes: string[]; caption: string }[] = [
   {
     id: "fp",
-    color: "#F59E0B",
+    color: "#F96000",
     nodes: ["doc", "fgd", "obs"],
     caption: "Documents say contraceptive uptake rose — but FGDs with rights-holders + on-site observation reveal stockouts. The methods disagree, so the finding is qualified.",
   },
   {
     id: "law",
-    color: "#14B8A6",
+    color: "#2171EC",
     nodes: ["kii", "gov", "doc"],
     caption: "Interviews with UNFPA GEWE staff + the government counterpart + documentary review converge: UNFPA supported a legal framework against child marriage. Triangulated finding.",
   },
@@ -97,7 +97,7 @@ export function TriangulationDiagram() {
             })}
 
           {/* Outer ring — methods */}
-          <circle r={RADIUS_METHODS + 26} fill="none" stroke="rgba(20,184,166,0.12)" strokeDasharray="3 4" />
+          <circle r={RADIUS_METHODS + 26} fill="none" stroke="rgba(33,113,236,0.12)" strokeDasharray="3 4" />
           {/* Inner ring — sources */}
           <circle r={RADIUS_SOURCES + 22} fill="none" stroke="rgba(245,158,11,0.18)" strokeDasharray="3 4" />
 
@@ -131,7 +131,7 @@ export function TriangulationDiagram() {
                 x={x}
                 y={y}
                 label={node.label}
-                color="#F59E0B"
+                color="#F96000"
                 emphasised={isActive || isHover}
                 onHover={(h) => setHover(h ? node.id : null)}
               />
@@ -151,7 +151,7 @@ export function TriangulationDiagram() {
                 x={x}
                 y={y}
                 label={node.label}
-                color="#14B8A6"
+                color="#2171EC"
                 emphasised={isActive || isHover}
                 onHover={(h) => setHover(h ? node.id : null)}
               />

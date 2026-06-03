@@ -14,18 +14,18 @@ const VARIANT_STYLES: Record<
   { bg: string; border: string; icon: string; iconBg: string; iconColor: string; titleColor: string }
 > = {
   key: {
-    bg: "rgba(0, 111, 183, 0.04)",
-    border: "rgba(0, 111, 183, 0.18)",
+    bg: "rgba(249, 96, 0, 0.04)",
+    border: "rgba(249, 96, 0, 0.18)",
     icon: "◆",
     iconBg: "var(--un-blue-100)",
     iconColor: "var(--un-blue-700)",
     titleColor: "var(--un-blue-800)",
   },
   tip: {
-    bg: "rgba(20, 184, 166, 0.05)",
-    border: "rgba(20, 184, 166, 0.22)",
+    bg: "rgba(33, 113, 236, 0.05)",
+    border: "rgba(33, 113, 236, 0.22)",
     icon: "✓",
-    iconBg: "rgba(20, 184, 166, 0.15)",
+    iconBg: "rgba(33, 113, 236, 0.15)",
     iconColor: "#0F766E",
     titleColor: "#0F766E",
   },
@@ -34,7 +34,7 @@ const VARIANT_STYLES: Record<
     border: "rgba(245, 158, 11, 0.30)",
     icon: "!",
     iconBg: "rgba(245, 158, 11, 0.18)",
-    iconColor: "#B45309",
+    iconColor: "#AE4300",
     titleColor: "#92400E",
   },
 };

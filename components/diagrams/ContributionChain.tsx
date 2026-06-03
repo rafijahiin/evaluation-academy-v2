@@ -56,7 +56,7 @@ const LINKS: Link[] = [
       "Policy briefs and guidance documents produced",
     ],
     icon: Package,
-    color: "#0E7C7B",
+    color: "#184EA5",
   },
   {
     id: "outcomes",

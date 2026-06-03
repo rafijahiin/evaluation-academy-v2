@@ -18,7 +18,7 @@ export function InPractice({
     <section
       className="my-6 rounded-2xl border-l-[3px] pl-5 pr-5 py-4"
       style={{
-        background: "rgba(10, 37, 64, 0.025)",
+        background: "rgba(19, 22, 25, 0.025)",
         borderLeftColor: "var(--un-blue-900)",
       }}
     >

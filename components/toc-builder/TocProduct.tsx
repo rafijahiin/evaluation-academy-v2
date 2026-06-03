@@ -530,7 +530,7 @@ function ResultCard({ items }: { items: string[] }) {
     <div
       className="relative rounded-3xl overflow-hidden flex flex-col"
       style={{
-        background: "linear-gradient(180deg, #FFF8E1 0%, #FEF3C7 100%)",
+        background: "linear-gradient(180deg, #FFF8E1 0%, #FDCFB3 100%)",
         border: "2px solid rgba(245, 158, 11, 0.40)",
         boxShadow:
           "0 1px 0 rgba(255,255,255,0.6) inset, 0 16px 32px -20px rgba(245, 158, 11, 0.45)",
@@ -541,14 +541,14 @@ function ResultCard({ items }: { items: string[] }) {
         <div
           className="w-16 h-16 rounded-full flex items-center justify-center text-white shadow-card mb-3"
           style={{
-            background: "linear-gradient(135deg, var(--amber) 0%, #B45309 100%)",
+            background: "linear-gradient(135deg, var(--amber) 0%, #AE4300 100%)",
           }}
         >
           <Sparkles className="w-7 h-7" strokeWidth={2.2} fill="white" />
         </div>
         <div
           className="text-[10.5px] uppercase tracking-[0.20em] font-bold text-center"
-          style={{ color: "#B45309" }}
+          style={{ color: "#AE4300" }}
         >
           Transformative Result
         </div>
@@ -632,7 +632,7 @@ function VerticalAssumption({
         <div
           className="flex-1 rounded-md px-3 py-2"
           style={{
-            background: "linear-gradient(180deg, #FEF3C7 0%, #FDE68A 100%)",
+            background: "linear-gradient(180deg, #FDCFB3 0%, #FDE68A 100%)",
             border: "1px solid rgba(245, 158, 11, 0.40)",
             boxShadow:
               "0 1px 0 rgba(255,255,255,0.7) inset, 0 6px 12px -8px rgba(146, 64, 14, 0.30)",
@@ -642,11 +642,11 @@ function VerticalAssumption({
           <div className="flex items-center gap-1.5 mb-0.5">
             <ShieldCheck
               className="w-3 h-3 shrink-0"
-              style={{ color: "#B45309" }}
+              style={{ color: "#AE4300" }}
             />
             <span
               className="text-[9.5px] uppercase tracking-[0.16em] font-bold"
-              style={{ color: "#B45309" }}
+              style={{ color: "#AE4300" }}
             >
               Key assumption
             </span>
@@ -727,7 +727,7 @@ function InterZoneAssumption({
         <div
           className="rounded-md px-3 py-2"
           style={{
-            background: "linear-gradient(180deg, #FEF3C7 0%, #FDE68A 100%)",
+            background: "linear-gradient(180deg, #FDCFB3 0%, #FDE68A 100%)",
             border: "1px solid rgba(245, 158, 11, 0.40)",
             boxShadow:
               "0 1px 0 rgba(255,255,255,0.7) inset, 0 6px 12px -8px rgba(146, 64, 14, 0.30)",
@@ -738,11 +738,11 @@ function InterZoneAssumption({
           <div className="flex items-center gap-1.5 mb-0.5">
             <ShieldCheck
               className="w-3 h-3 shrink-0"
-              style={{ color: "#B45309" }}
+              style={{ color: "#AE4300" }}
             />
             <span
               className="text-[9.5px] uppercase tracking-[0.16em] font-bold"
-              style={{ color: "#B45309" }}
+              style={{ color: "#AE4300" }}
             >
               Key assumption
             </span>

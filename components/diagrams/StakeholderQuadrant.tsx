@@ -56,7 +56,7 @@ const STAKEHOLDERS: Stakeholder[] = [
     label: "Implementing partners",
     power: 0.55,
     interest: 0.85,
-    color: "#0E7C7B",
+    color: "#184EA5",
     detail:
       "Mid power · high interest. They deliver the interventions and hold operational evidence. Interview during fieldwork; involve in the analysis workshop.",
   },
@@ -74,7 +74,7 @@ const STAKEHOLDERS: Stakeholder[] = [
     label: "Other line ministries",
     power: 0.7,
     interest: 0.35,
-    color: "#B45309",
+    color: "#AE4300",
     detail:
       "Education, gender, statistics — relevant for coherence questions. Keep satisfied with summary briefings; deep-dive only on touchpoints with the CP.",
   },

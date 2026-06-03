@@ -136,7 +136,7 @@ export function FindingsPyramid() {
                     fill={isActive ? "white" : "var(--ink-1)"}
                     style={{
                       pointerEvents: "none",
-                      fontFamily: "var(--font-display, Fraunces, serif)",
+                      fontFamily: "var(--font-display), system-ui, sans-serif",
                     }}
                   >
                     {tier.label}

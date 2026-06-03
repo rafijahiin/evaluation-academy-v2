@@ -159,10 +159,10 @@ function accentInk(accent: string) {
 
 function accentBg(accent: string) {
   switch (accent) {
-    case "un-blue": return "linear-gradient(135deg, rgba(0,111,183,0.04) 0%, rgba(0,111,183,0.10) 100%)";
-    case "teal": return "linear-gradient(135deg, rgba(20,184,166,0.04) 0%, rgba(20,184,166,0.10) 100%)";
+    case "un-blue": return "linear-gradient(135deg, rgba(249,96,0,0.04) 0%, rgba(249,96,0,0.10) 100%)";
+    case "teal": return "linear-gradient(135deg, rgba(33,113,236,0.04) 0%, rgba(33,113,236,0.10) 100%)";
     case "amber": return "linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(245,158,11,0.12) 100%)";
-    case "navy": return "linear-gradient(135deg, rgba(10,37,64,0.04) 0%, rgba(10,37,64,0.09) 100%)";
+    case "navy": return "linear-gradient(135deg, rgba(19,22,25,0.04) 0%, rgba(19,22,25,0.09) 100%)";
     default: return "transparent";
   }
 }

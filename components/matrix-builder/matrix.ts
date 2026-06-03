@@ -26,10 +26,10 @@ export const CRITERIA: Criterion[] = [
   { id: "relevance", label: "Relevance", color: "var(--un-blue)" },
   { id: "coherence", label: "Coherence", color: "var(--teal)" },
   { id: "effectiveness", label: "Effectiveness", color: "var(--un-blue-900)" },
-  { id: "efficiency", label: "Efficiency", color: "#0E7C7B" },
+  { id: "efficiency", label: "Efficiency", color: "#184EA5" },
   { id: "sustainability", label: "Sustainability", color: "var(--un-blue-700)" },
   { id: "coverage", label: "Coverage", color: "var(--amber)", humanitarian: true },
-  { id: "connectedness", label: "Connectedness", color: "#B45309", humanitarian: true },
+  { id: "connectedness", label: "Connectedness", color: "#AE4300", humanitarian: true },
 ];
 
 export function criterion(id: CriterionId): Criterion {

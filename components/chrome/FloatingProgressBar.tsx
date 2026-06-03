@@ -28,7 +28,7 @@ export function FloatingProgressBar() {
         style={{
           background:
             "linear-gradient(90deg, var(--un-blue) 0%, var(--teal) 60%, var(--amber) 100%)",
-          boxShadow: "0 0 12px rgba(0,111,183,0.5)",
+          boxShadow: "0 0 12px rgba(249,96,0,0.5)",
         }}
         initial={{ width: 0 }}
         animate={{ width: `${percent}%` }}

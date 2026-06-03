@@ -39,7 +39,7 @@ type VerdictMeta = {
 
 const VERDICT_META: Record<Verdict, VerdictMeta> = {
   good: { label: "Strong call", color: "#047857", bg: "#ECFDF5", Icon: Check },
-  risky: { label: "Risky", color: "#B45309", bg: "#FFFBEB", Icon: AlertTriangle },
+  risky: { label: "Risky", color: "#AE4300", bg: "#FFFBEB", Icon: AlertTriangle },
   wrong: { label: "Misstep", color: "#BE123C", bg: "#FFF1F2", Icon: X },
 };
 

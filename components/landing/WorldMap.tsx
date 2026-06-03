@@ -116,7 +116,7 @@ export function WorldMap() {
           height="5"
           patternUnits="userSpaceOnUse"
         >
-          <circle cx="1" cy="1" r="0.85" fill="rgba(159, 201, 232, 0.55)" />
+          <circle cx="1" cy="1" r="0.85" fill="rgba(253, 207, 179, 0.55)" />
         </pattern>
       </defs>
 
@@ -129,7 +129,7 @@ export function WorldMap() {
             key={i}
             d={d}
             fill="url(#map-dots)"
-            stroke="rgba(159, 201, 232, 0.10)"
+            stroke="rgba(253, 207, 179, 0.10)"
             strokeWidth={0.4}
           />
         );
