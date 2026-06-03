@@ -3,15 +3,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { m } from "motion/react";
 import { cn } from "@/lib/utils";
-import { useProgress, computePercent } from "@/lib/progress";
+import { useProgress, useXp, computePercent } from "@/lib/progress";
 import { COURSE_META } from "@/content/chapters";
-import { ArrowRight, Compass } from "lucide-react";
+import { ArrowRight, Compass, Search, Flame } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
   const { state } = useProgress();
+  const { xp } = useXp();
   const percent = computePercent(state.lessonsCompleted.length, COURSE_META.totalLessons);
   const hasProgress = state.lessonsCompleted.length > 0;
+  const streak = state.streak?.current ?? 0;
   const resumeHref = state.lastChapterSlug && state.lastLessonSlug
     ? `/learn/${state.lastChapterSlug}/${state.lastLessonSlug}`
     : "/learn";
@@ -54,13 +56,46 @@ export function Navbar() {
 
           {/* Right: actions */}
           <div className="flex items-center gap-2">
+            {/* Search trigger — opens the ⌘K command palette */}
+            <button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("open-command-palette"))
+              }
+              aria-label="Search (Cmd+K)"
+              className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-2 rounded-xl text-[13px] font-medium text-ink-2 border border-border hover:bg-surface-2 transition-colors"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span className="hidden md:inline text-ink-3">Search</span>
+              <kbd className="hidden md:inline-flex items-center px-1.5 py-0.5 rounded-md bg-surface-2 border border-border text-[10px] font-medium text-ink-3">
+                ⌘K
+              </kbd>
+            </button>
+
             {hasProgress && (
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-un-50 text-un-700 text-xs font-medium">
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: "var(--un-blue)" }}
-                />
-                {percent}% complete
+              <div className="hidden md:flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-un-50 text-un-700 text-xs font-medium">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full"
+                    style={{ background: "var(--un-blue)" }}
+                  />
+                  {percent}%
+                </div>
+                {streak > 0 && (
+                  <div
+                    className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium"
+                    style={{ background: "var(--amber-soft, #FEF3C7)", color: "#B45309" }}
+                    title={`${streak}-day study streak`}
+                  >
+                    <Flame className="w-3.5 h-3.5" />
+                    {streak}
+                  </div>
+                )}
+                {xp > 0 && (
+                  <div className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-surface-2 text-ink-2 text-xs font-semibold tabular-nums">
+                    {xp} XP
+                  </div>
+                )}
               </div>
             )}
 

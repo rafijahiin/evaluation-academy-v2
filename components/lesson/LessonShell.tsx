@@ -7,6 +7,7 @@ import { useEffect, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import type { LessonFrontmatter } from "@/content/lessons-manifest";
 import { LessonContextProvider } from "./LessonContext";
+import { NotesPanel } from "./NotesPanel";
 
 /**
  * Serializable lesson metadata. The MDX component itself can't be
@@ -156,6 +157,9 @@ export function LessonShell({
               {children}
             </LessonContextProvider>
           </div>
+
+          {/* Personal notes */}
+          <NotesPanel lessonKey={`${lesson.chapter}/${lesson.slug}`} />
 
           {/* End-of-chapter quiz CTA — surfaces the (otherwise easy-to-miss)
               chapter quiz when you finish the last lesson of a phase. */}

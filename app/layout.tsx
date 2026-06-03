@@ -6,6 +6,7 @@ import { Footer } from "@/components/chrome/Footer";
 import { FloatingProgressBar } from "@/components/chrome/FloatingProgressBar";
 import { Breadcrumb } from "@/components/chrome/Breadcrumb";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { CommandPalette } from "@/components/search/CommandPalette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +57,7 @@ export default function RootLayout({
           <Breadcrumb />
           <main className="flex-1">{children}</main>
           <Footer />
+          <CommandPalette />
         </MotionProvider>
       </body>
     </html>

@@ -1,7 +1,12 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Check, Play } from "lucide-react";
-import { useProgress, computePercent } from "@/lib/progress";
+import { ArrowRight, Check, Play, Flame, Trophy, Layers, Lock } from "lucide-react";
+import {
+  useProgress,
+  useXp,
+  computePercent,
+  computeBadges,
+} from "@/lib/progress";
 import { ProgressRing } from "@/components/motion/ProgressRing";
 import { CHAPTER_ICONS } from "@/components/illustrations/ChapterIcon";
 import {
@@ -33,6 +38,10 @@ export function DashboardClient({
   totalLessons: number;
 }) {
   const { state } = useProgress();
+  const { xp } = useXp();
+  const badges = computeBadges(state, totalLessons);
+  const earnedBadges = badges.filter((b) => b.earned).length;
+  const streak = state.streak?.current ?? 0;
   const completedSet = new Set(state.lessonsCompleted);
   const completedTotal = state.lessonsCompleted.filter((s) =>
     chapters.some((c) => c.lessonSlugs.includes(s)),
@@ -135,6 +144,75 @@ export function DashboardClient({
         </Reveal>
       )}
 
+      {/* Stats + badges + flashcards */}
+      {hasProgress && (
+        <Reveal>
+          <div className="mb-10 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-4">
+            {/* stat tiles */}
+            <div className="grid grid-cols-3 gap-3">
+              <DashStat
+                icon={Trophy}
+                value={`${xp}`}
+                label="XP earned"
+                accent="var(--un-blue)"
+              />
+              <DashStat
+                icon={Flame}
+                value={`${streak}`}
+                label={streak === 1 ? "day streak" : "day streak"}
+                accent="var(--amber)"
+              />
+              <DashStat
+                icon={Check}
+                value={`${earnedBadges}/${badges.length}`}
+                label="badges"
+                accent="var(--teal)"
+              />
+            </div>
+            {/* flashcards CTA */}
+            <Link
+              href="/review"
+              className="group flex items-center gap-3 rounded-2xl border border-border bg-white px-5 py-4 hover:border-un-200 hover:-translate-y-0.5 transition-all"
+            >
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-un-50 text-un-700">
+                <Layers className="w-5 h-5" strokeWidth={2.2} />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-[14px] font-semibold text-ink-1">
+                  Review flashcards
+                </span>
+                <span className="block text-[12px] text-ink-3">
+                  Spaced repetition
+                </span>
+              </span>
+              <ArrowRight className="w-4 h-4 text-un-700 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {/* badge rail */}
+          <div className="mb-10 flex flex-wrap gap-2.5">
+            {badges.map((b) => (
+              <div
+                key={b.id}
+                title={b.description}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium border transition-colors ${
+                  b.earned
+                    ? "bg-white border-un-200 text-ink-1"
+                    : "bg-surface-2 border-border text-ink-4"
+                }`}
+              >
+                {b.earned ? (
+                  <Trophy className="w-3.5 h-3.5 text-amber-500" />
+                ) : (
+                  <Lock className="w-3 h-3" />
+                )}
+                {b.label}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      )}
+
       {/* Chapter grid */}
       <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {chapters.map((c) => {
@@ -207,6 +285,40 @@ export function DashboardClient({
 
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function DashStat({
+  icon: Icon,
+  value,
+  label,
+  accent,
+}: {
+  icon: typeof Flame;
+  value: string;
+  label: string;
+  accent: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-white px-4 py-4 flex items-center gap-3">
+      <span
+        className="inline-flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+        style={{
+          background: `color-mix(in srgb, ${accent} 12%, transparent)`,
+          color: accent,
+        }}
+      >
+        <Icon className="w-5 h-5" strokeWidth={2.2} />
+      </span>
+      <div className="min-w-0">
+        <div className="font-numeric font-semibold text-[22px] leading-none tabular-nums text-ink-1">
+          {value}
+        </div>
+        <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-ink-3 font-medium">
+          {label}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function accentInk(accent: string) {
