@@ -46,6 +46,10 @@ function Ray({
   delay: number;
 }) {
   const rad = ((angle + 90) * Math.PI) / 180;
+  // Round to 2 dp so the server- and client-rendered path strings are
+  // byte-identical (raw Math.cos/sin differ in the last ULP across
+  // Node vs the browser, which triggers a hydration mismatch).
+  const r2 = (n: number) => Math.round(n * 100) / 100;
   const farX = FOCAL_X + Math.cos(rad) * 1300 * length;
   const farY = FOCAL_Y + Math.sin(rad) * 1300 * length;
   const perpX = -Math.sin(rad) * 95;
@@ -53,7 +57,7 @@ function Ray({
 
   return (
     <m.path
-      d={`M ${FOCAL_X} ${FOCAL_Y} L ${farX + perpX} ${farY + perpY} L ${farX - perpX} ${farY - perpY} Z`}
+      d={`M ${FOCAL_X} ${FOCAL_Y} L ${r2(farX + perpX)} ${r2(farY + perpY)} L ${r2(farX - perpX)} ${r2(farY - perpY)} Z`}
       fill="url(#ray-grad)"
       style={{ opacity }}
       animate={{ opacity: [opacity * 0.7, opacity * 1.5, opacity * 0.7] }}

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useProgress, useXp, computePercent } from "@/lib/progress";
 import { COURSE_META } from "@/content/chapters";
 import { ArrowRight, Compass, Search, Flame } from "lucide-react";
+import { NavMenu } from "./NavMenu";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -27,32 +28,37 @@ export function Navbar() {
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="glass rounded-2xl shadow-card flex items-center justify-between gap-3 px-4 sm:px-5 py-3"
         >
-          {/* Brand */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 group focus:outline-none"
-            aria-label="Evaluation Academy — home"
-          >
-            <span
-              aria-hidden
-              className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--un-blue) 0%, var(--un-blue-700) 100%)",
-                boxShadow: "0 4px 10px rgba(249,96,0,0.28)",
-              }}
+          {/* Left: brand + Learn menu */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 group focus:outline-none"
+              aria-label="Evaluation Academy — home"
             >
-              <Compass className="w-5 h-5 text-white" strokeWidth={2.2} />
-            </span>
-            <span className="hidden sm:flex flex-col leading-none">
-              <span className="font-display text-[18px] font-semibold tracking-tight text-ink-1">
-                Evaluation <span className="italic" style={{ color: "var(--un-blue)" }}>Academy</span>
+              <span
+                aria-hidden
+                className="w-9 h-9 rounded-xl flex items-center justify-center"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--un-blue) 0%, var(--un-blue-700) 100%)",
+                  boxShadow: "0 4px 10px rgba(249,96,0,0.28)",
+                }}
+              >
+                <Compass className="w-5 h-5 text-white" strokeWidth={2.2} />
               </span>
-              <span className="text-[10px] uppercase tracking-[0.14em] text-ink-3 mt-0.5">
-                UNFPA Handbook 2024
+              <span className="hidden sm:flex flex-col leading-none">
+                <span className="font-display text-[18px] font-semibold tracking-tight text-ink-1">
+                  Evaluation <span className="italic" style={{ color: "var(--un-blue)" }}>Academy</span>
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.14em] text-ink-3 mt-0.5">
+                  UNFPA Handbook 2024
+                </span>
               </span>
-            </span>
-          </Link>
+            </Link>
+
+            {/* Learn — reveals every destination on the site */}
+            <NavMenu />
+          </div>
 
           {/* Right: actions */}
           <div className="flex items-center gap-2">
@@ -98,22 +104,6 @@ export function Navbar() {
                 )}
               </div>
             )}
-
-            <Link
-              href="/toc-builder"
-              className={cn(
-                "hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-[13px] font-medium",
-                "text-un-700 border border-un-200 hover:bg-un-50 transition-colors",
-              )}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                <rect x="2" y="8" width="5" height="8" rx="1.5" />
-                <rect x="9.5" y="8" width="5" height="8" rx="1.5" />
-                <rect x="17" y="8" width="5" height="8" rx="1.5" />
-                <path d="M7 12h2.5M14.5 12H17" />
-              </svg>
-              <span>ToC Builder</span>
-            </Link>
 
             {hasProgress && (
               <Link
