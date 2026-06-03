@@ -50,6 +50,7 @@ export default async function LessonPage(props: { params: Promise<Params> }) {
       : findNextChapterFirst(chapter);
 
   const Content = entry.Component;
+  const isLastInChapter = idx === chapterLessons.length - 1;
 
   return (
     <LessonShell
@@ -57,6 +58,7 @@ export default async function LessonPage(props: { params: Promise<Params> }) {
       prev={prevEntry ? toMeta(prevEntry) : null}
       next={nextEntry ? toMeta(nextEntry) : null}
       chapterLessons={chapterLessons.map(toMeta)}
+      isLastInChapter={isLastInChapter}
     >
       <Content />
     </LessonShell>

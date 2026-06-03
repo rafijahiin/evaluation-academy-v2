@@ -90,7 +90,7 @@ export function Navbar() {
             )}
 
             <Link
-              href={pathname === "/" ? "/learn" : "/"}
+              href={hasProgress ? resumeHref : "/learn"}
               className={cn(
                 "inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-medium text-white transition-all",
                 "shadow-card hover:shadow-bloom hover:-translate-y-0.5",

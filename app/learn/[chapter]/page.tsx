@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, GraduationCap } from "lucide-react";
 import { CHAPTERS } from "@/content/chapters";
 import { getLessonsByChapter } from "@/content/lessons-manifest";
 import { CHAPTER_ICONS } from "@/components/illustrations/ChapterIcon";
@@ -119,6 +119,66 @@ export default async function ChapterIndexPage(props: {
           </StaggerItem>
         ))}
       </StaggerChildren>
+
+      {/* Chapter quiz CTA — previously the per-chapter quizzes were
+          unreachable from anywhere in the UI. */}
+      <Reveal>
+        <Link
+          href={`/quiz/${chapter}`}
+          className="group mt-8 flex items-center gap-5 px-5 sm:px-7 py-6 rounded-2xl border-2 border-dashed bg-white hover:bg-surface-2 hover:-translate-y-0.5 transition-all"
+          style={{ borderColor: `${accentColor}55` }}
+        >
+          <div
+            className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white"
+            style={{ background: accentColor }}
+          >
+            <GraduationCap className="w-5 h-5" strokeWidth={2.2} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div
+              className="text-[11px] uppercase tracking-[0.14em] font-semibold"
+              style={{ color: accentColor }}
+            >
+              Check your understanding
+            </div>
+            <h3 className="mt-0.5 text-[17px] sm:text-[18px] font-semibold text-ink-1 leading-tight">
+              Take the {meta.title} quiz
+            </h3>
+            <p className="mt-1 text-[13.5px] text-ink-2 leading-[1.5]">
+              A short scored quiz on Phase {meta.number}. Pass at 70% to lock in the chapter.
+            </p>
+          </div>
+          <ArrowRight
+            className="hidden sm:block w-5 h-5 shrink-0 text-ink-3 group-hover:translate-x-1 transition-transform"
+            style={{ color: accentColor }}
+            strokeWidth={2.2}
+          />
+        </Link>
+      </Reveal>
+
+      {/* Final exam + certificate — reachable from every chapter once you've
+          worked through the phases. */}
+      <Reveal>
+        <div className="mt-4 flex flex-col sm:flex-row gap-3">
+          <Link
+            href="/exam"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl text-white font-medium text-[14px] hover:-translate-y-0.5 transition-all"
+            style={{
+              background:
+                "linear-gradient(135deg, var(--un-blue) 0%, var(--un-blue-700) 100%)",
+            }}
+          >
+            <GraduationCap className="w-4 h-4" />
+            Final exam
+          </Link>
+          <Link
+            href="/certificate"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl text-ink-1 font-medium text-[14px] bg-white border border-border hover:border-un-200 transition-colors"
+          >
+            View certificate
+          </Link>
+        </div>
+      </Reveal>
     </div>
   );
 }

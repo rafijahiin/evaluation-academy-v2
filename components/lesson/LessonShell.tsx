@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Clock, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Check, GraduationCap } from "lucide-react";
 import { CHAPTERS } from "@/content/chapters";
 import { useProgress } from "@/lib/progress";
 import { useEffect, type ReactNode } from "react";
@@ -25,6 +25,7 @@ type Props = {
   prev: LessonMeta | null;
   next: LessonMeta | null;
   chapterLessons: LessonMeta[];
+  isLastInChapter?: boolean;
   children: ReactNode;
 };
 
@@ -33,6 +34,7 @@ export function LessonShell({
   prev,
   next,
   chapterLessons,
+  isLastInChapter = false,
   children,
 }: Props) {
   const chapter = CHAPTERS.find((c) => c.slug === lesson.chapter);
@@ -155,8 +157,33 @@ export function LessonShell({
             </LessonContextProvider>
           </div>
 
+          {/* End-of-chapter quiz CTA — surfaces the (otherwise easy-to-miss)
+              chapter quiz when you finish the last lesson of a phase. */}
+          {isLastInChapter && (
+            <Link
+              href={`/quiz/${lesson.chapter}`}
+              className="group mt-14 flex items-center gap-4 px-5 py-5 rounded-2xl border-2 border-dashed border-un-200 bg-un-50/50 hover:bg-un-50 hover:-translate-y-0.5 transition-all"
+            >
+              <span className="shrink-0 w-11 h-11 rounded-full flex items-center justify-center text-white bg-un-700">
+                <GraduationCap className="w-5 h-5" strokeWidth={2.2} />
+              </span>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10.5px] uppercase tracking-[0.14em] font-semibold text-un-700">
+                  End of {chapter ? chapter.title : "chapter"}
+                </div>
+                <div className="text-[15.5px] font-semibold text-ink-1">
+                  Take the chapter quiz
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 shrink-0 text-un-700 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          )}
+
           {/* Prev / next */}
-          <nav className="mt-16 pt-6 border-t border-border flex flex-col sm:flex-row gap-3">
+          <nav className={cn(
+            "pt-6 border-t border-border flex flex-col sm:flex-row gap-3",
+            isLastInChapter ? "mt-8" : "mt-16",
+          )}>
             {prev ? (
               <Link
                 href={prev.href}

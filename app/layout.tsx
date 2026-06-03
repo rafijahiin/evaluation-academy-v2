@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/chrome/Navbar";
+import { Footer } from "@/components/chrome/Footer";
 import { FloatingProgressBar } from "@/components/chrome/FloatingProgressBar";
 import { Breadcrumb } from "@/components/chrome/Breadcrumb";
 import { MotionProvider } from "@/components/motion/MotionProvider";
@@ -54,6 +55,7 @@ export default function RootLayout({
           <Navbar />
           <Breadcrumb />
           <main className="flex-1">{children}</main>
+          <Footer />
         </MotionProvider>
       </body>
     </html>

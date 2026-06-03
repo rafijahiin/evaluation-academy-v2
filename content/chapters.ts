@@ -79,7 +79,11 @@ export const CHAPTERS: Chapter[] = [
 
 export const COURSE_META = {
   totalChapters: CHAPTERS.length,
-  totalLessons: 51, // current target after expansion
+  // Actual number of lesson MDX files in content/lessons. Keep in sync with
+  // the manifest (re-run scripts/generate-manifest.mjs and bump if lessons
+  // are added/removed). Hardcoded rather than imported from the manifest to
+  // avoid pulling all MDX into this widely-imported module.
+  totalLessons: 34,
   totalMinutes: CHAPTERS.reduce((s, c) => s + c.estimatedMinutes, 0),
   source: "UNFPA Evaluation Handbook 2024",
   sourceUrl:
