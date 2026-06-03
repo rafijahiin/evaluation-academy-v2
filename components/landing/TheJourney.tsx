@@ -273,7 +273,8 @@ function JourneyCard({ number, title, slug, palette }: CardProps) {
           {/* bottom: title + arrow */}
           <div>
             <m.h3
-              className="font-display tracking-[-0.01em] leading-[1.02] text-[28px] sm:text-[34px]"
+              lang="en"
+              className="font-display tracking-[-0.01em] leading-[1.05] text-[23px] sm:text-[27px] break-words hyphens-auto"
               style={{ color: palette.text, fontWeight: 500 }}
               variants={{
                 rest: { y: 0 },
