@@ -3,12 +3,14 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { m, AnimatePresence } from "motion/react";
 import {
-  Printer,
   Share2,
   Pencil,
   Check,
   AlertCircle,
   ArrowRight,
+  Image as ImageIcon,
+  FileText,
+  Loader2,
 } from "lucide-react";
 import { Certificate } from "./Certificate";
 import { NameModal } from "./NameModal";
@@ -32,6 +34,8 @@ export function CertificateClient() {
   const [mounted, setMounted] = useState(false);
   const [showNameModal, setShowNameModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [err, setErr] = useState<string | null>(null);
   const certificateRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,9 +51,88 @@ export function CertificateClient() {
     }
   }, [mounted, state.examScore, state.learnerName]);
 
-  const handlePrint = () => {
-    window.print();
-  };
+  function nameSlug() {
+    const n = state.learnerName;
+    return n ? "-" + n.toLowerCase().replace(/\s+/g, "-") : "";
+  }
+
+  function download(blob: Blob, filename: string) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function exportImage(kind: "png" | "jpg") {
+    const node = certificateRef.current;
+    if (!node) return;
+    setErr(null);
+    setBusy(kind);
+    try {
+      const lib = await import("html-to-image");
+      if (document.fonts?.ready) await document.fonts.ready;
+      const opts = { pixelRatio: 2, backgroundColor: "#ffffff", cacheBust: true };
+      const dataUrl =
+        kind === "png"
+          ? await lib.toPng(node, opts)
+          : await lib.toJpeg(node, { ...opts, quality: 0.96 });
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `certificate${nameSlug()}.${kind}`;
+      a.click();
+    } catch (e) {
+      setErr("Image export failed — try again, or use DOCX.");
+      console.error(e);
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function exportDocx() {
+    setErr(null);
+    setBusy("docx");
+    try {
+      const docx = await import("docx");
+      const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = docx;
+      const name = state.learnerName || "Learner";
+      const pct = Math.round((state.examScore ?? 0) * 100);
+      const dateStr = (state.updatedAt ? new Date(state.updatedAt) : new Date()).toLocaleDateString(
+        "en-GB",
+        { day: "numeric", month: "long", year: "numeric" },
+      );
+      const C = AlignmentType.CENTER;
+      const children = [
+        new Paragraph({ alignment: C, children: [new TextRun({ text: "EVALUATION ACADEMY", bold: true, color: "F96000" })] }),
+        new Paragraph({ alignment: C, children: [new TextRun({ text: "CERTIFICATE OF COMPLETION", bold: true, color: "686A6C" })] }),
+        new Paragraph({ text: "" }),
+        new Paragraph({ alignment: C, heading: HeadingLevel.HEADING_2, children: [new TextRun("This certifies that")] }),
+        new Paragraph({ alignment: C, children: [new TextRun({ text: name, bold: true, italics: true, size: 48, color: "013E55" })] }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: C,
+          children: [
+            new TextRun(
+              "has successfully completed the course in the UNFPA Country Programme Evaluation methodology — covering all five phases from preparation through dissemination — and passed the final exam with a score of ",
+            ),
+            new TextRun({ text: `${pct}%.`, bold: true }),
+          ],
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({ alignment: C, children: [new TextRun({ text: `Date of completion: ${dateStr}`, color: "686A6C" })] }),
+        new Paragraph({ alignment: C, children: [new TextRun({ text: "Independent learning · Based on the UNFPA Evaluation Handbook 2024", color: "9A9DA2", size: 16 })] }),
+      ];
+      const doc = new Document({ sections: [{ children }] });
+      const blob = await Packer.toBlob(doc);
+      download(blob, `certificate${nameSlug()}.docx`);
+    } catch (e) {
+      setErr("DOCX export failed — try again.");
+      console.error(e);
+    } finally {
+      setBusy(null);
+    }
+  }
 
   const handleShare = async () => {
     try {
@@ -147,18 +230,43 @@ export function CertificateClient() {
           </button>
           <button
             type="button"
-            onClick={handlePrint}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-white text-[13px] font-medium hover:shadow-bloom hover:-translate-y-0.5 transition-all"
+            onClick={() => exportImage("png")}
+            disabled={busy === "png"}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-[13px] font-medium text-ink-1 border border-border hover:border-un-200 hover:bg-surface-2 transition-colors disabled:opacity-60"
+          >
+            {busy === "png" ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ImageIcon className="w-3.5 h-3.5" />}
+            PNG
+          </button>
+          <button
+            type="button"
+            onClick={() => exportImage("jpg")}
+            disabled={busy === "jpg"}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-[13px] font-medium text-ink-1 border border-border hover:border-un-200 hover:bg-surface-2 transition-colors disabled:opacity-60"
+          >
+            {busy === "jpg" ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ImageIcon className="w-3.5 h-3.5" />}
+            JPG
+          </button>
+          <button
+            type="button"
+            onClick={exportDocx}
+            disabled={busy === "docx"}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-white text-[13px] font-medium hover:shadow-bloom hover:-translate-y-0.5 transition-all disabled:opacity-60"
             style={{
               background:
                 "linear-gradient(135deg, var(--un-blue) 0%, var(--un-blue-700) 100%)",
             }}
           >
-            <Printer className="w-3.5 h-3.5" />
-            Print / PDF
+            {busy === "docx" ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <FileText className="w-3.5 h-3.5" />}
+            DOCX
           </button>
         </div>
       </div>
+
+      {err && (
+        <div className="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-2.5 text-[13px] text-rose-700 no-print">
+          {err}
+        </div>
+      )}
 
       {/* The certificate itself */}
       <Certificate
