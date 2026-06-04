@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Clock, Check, GraduationCap } from "lucide-react";
 import { CHAPTERS } from "@/content/chapters";
 import { useProgress } from "@/lib/progress";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import type { LessonFrontmatter } from "@/content/lessons-manifest";
 import { LessonContextProvider } from "./LessonContext";
@@ -40,6 +40,12 @@ export function LessonShell({
 }: Props) {
   const chapter = CHAPTERS.find((c) => c.slug === lesson.chapter);
   const { state, markViewed } = useProgress();
+  // Stable context value — a fresh object here would re-fire descendant
+  // effects (e.g. the inline QuizQuestion) on every render.
+  const lessonCtx = useMemo(
+    () => ({ chapter: lesson.chapter, slug: lesson.slug }),
+    [lesson.chapter, lesson.slug],
+  );
   const isCompleted = state.lessonsCompleted.includes(
     `${lesson.chapter}/${lesson.slug}`,
   );
@@ -151,9 +157,7 @@ export function LessonShell({
               LessonContextProvider lets the inline <QuizQuestion> know which
               lesson it belongs to, so a correct answer marks completion. */}
           <div className="lesson-prose">
-            <LessonContextProvider
-              value={{ chapter: lesson.chapter, slug: lesson.slug }}
-            >
+            <LessonContextProvider value={lessonCtx}>
               {children}
             </LessonContextProvider>
           </div>

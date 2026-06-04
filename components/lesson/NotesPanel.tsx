@@ -9,24 +9,24 @@ import { useNotes } from "@/lib/progress";
  */
 export function NotesPanel({ lessonKey }: { lessonKey: string }) {
   const { note, save } = useNotes(lessonKey);
-  const [value, setValue] = useState("");
+  // `draft` is null until the user starts editing — until then we show the
+  // stored note (which loads asynchronously from localStorage). This avoids
+  // the old bug where a saved note never appeared because the textarea was
+  // hydrated to "" before the store had loaded.
+  const [draft, setDraft] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
-  const hydrated = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const latest = useRef(""); // always-current text, immune to state-batching races
 
-  // Hydrate once from the store (avoid clobbering local typing afterward).
+  const value = draft ?? note;
+
+  // Reset editing state when switching lessons (the component is reused).
   useEffect(() => {
-    if (!hydrated.current) {
-      setValue(note);
-      latest.current = note;
-      hydrated.current = true;
-    }
-  }, [note]);
+    setDraft(null);
+    setSaved(false);
+  }, [lessonKey]);
 
   function onChange(next: string) {
-    setValue(next);
-    latest.current = next;
+    setDraft(next);
     setSaved(false);
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => {
@@ -37,8 +37,10 @@ export function NotesPanel({ lessonKey }: { lessonKey: string }) {
 
   function flush() {
     if (timer.current) clearTimeout(timer.current);
-    save(latest.current);
-    setSaved(true);
+    if (draft != null) {
+      save(draft);
+      setSaved(true);
+    }
   }
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Check, X, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLessonContext } from "@/components/lesson/LessonContext";
@@ -31,12 +31,19 @@ export function QuizQuestion({
   const lesson = useLessonContext();
   const { markComplete } = useProgress();
 
-  // When the user selects the correct answer inside a lesson, mark complete.
-  useEffect(() => {
-    if (revealed && isCorrect && lesson) {
+  // Mark complete exactly once, in the click handler — NOT in an effect.
+  // (An effect keyed on the lesson-context object re-fired markComplete on
+  // every render, and since markComplete writes + dispatches a progress
+  // event that re-renders this tree, it produced an infinite update loop
+  // that froze the whole page once a lesson was answered correctly.)
+  function choose(choiceId: string) {
+    if (revealed) return;
+    setSelected(choiceId);
+    setRevealed(true);
+    if (choiceId === answer && lesson) {
       markComplete(`${lesson.chapter}/${lesson.slug}`, lesson.chapter);
     }
-  }, [revealed, isCorrect, lesson, markComplete]);
+  }
 
   return (
     <section className="my-8 rounded-2xl border border-border bg-white p-5 sm:p-6">
@@ -64,10 +71,7 @@ export function QuizQuestion({
               key={c.id}
               type="button"
               disabled={revealed}
-              onClick={() => {
-                setSelected(c.id);
-                setRevealed(true);
-              }}
+              onClick={() => choose(c.id)}
               className={cn(
                 "w-full text-left flex items-start gap-3 px-4 py-3 rounded-xl border transition-colors",
                 !revealed && "hover:bg-surface-2 hover:border-un-200 cursor-pointer",

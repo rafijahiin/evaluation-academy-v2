@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, m } from "motion/react";
 import {
@@ -82,11 +82,15 @@ export function ScenarioClient() {
     setHistory([]);
   }
 
-  // Award XP once when the simulation completes.
-  if (finished && !awarded.current) {
-    awarded.current = true;
-    addXp(15, "scenario");
-  }
+  // Award XP once when the simulation completes — in an effect, never
+  // during render (writing/dispatching during render updates other
+  // components mid-render and can loop).
+  useEffect(() => {
+    if (finished && !awarded.current) {
+      awarded.current = true;
+      addXp(15, "scenario");
+    }
+  }, [finished, addXp]);
 
   // ---- Intro ----
   if (!started) {
